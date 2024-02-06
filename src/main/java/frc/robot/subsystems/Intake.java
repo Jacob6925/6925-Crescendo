@@ -40,6 +40,9 @@ public class Intake extends Subsystem {
     public static final double k_ejectSpeed = -0.45;
     public static final double k_feedShooterSpeed = -0.5;
 
+    private final TalonFXConfiguration pivotConfig = new TalonFXConfiguration();
+    private final TalonFXConfiguration intakeConfig = new TalonFXConfiguration();
+
 /*-------------------------------- Private instance variables ---------------------------------*/
     private static Intake mInstance;
     private PeriodicIO m_periodicIO;
@@ -54,21 +57,21 @@ public class Intake extends Subsystem {
     private Intake() {
     super("Intake");
     
-    var slot0Configs = new Slot0Configs();
-    slot0Configs.kP = 0.0; 
-    slot0Configs.kI = 0.0; 
-    slot0Configs.kD = 0.0; 
+    Slot0Configs slot0 = intakeConfig.Slot0;
+    slot0.kP = 0;
+    slot0.kI = 0;
+    slot0.kD = 0;
 
-    var slot1Configs = new Slot1Configs();
-    slot1Configs.kP = 0.0; 
-    slot1Configs.kI = 0.0; 
-    slot1Configs.kD = 0.0; 
+    Slot1Configs slot1 = pivotConfig.Slot1;
+    slot1.kP = 0;
+    slot1.kI = 0;
+    slot1.kD = 0;
 
     intakeMotor = new TalonFX(1);
-    intakeMotor.getConfigurator().apply(slot0Configs);
+    intakeMotor.getConfigurator().apply(slot0);
 
     pivotMotor = new TalonFX(2);
-    pivotMotor.getConfigurator().apply(slot1Configs);
+    pivotMotor.getConfigurator().apply(slot1);
   
     m_periodicIO = new PeriodicIO();
     
@@ -107,7 +110,7 @@ public class Intake extends Subsystem {
 
     // Pivot control
     double pivot_angle = pivotTargetToAngle(m_periodicIO.pivot_target);
-    m_periodicIO.intake_pivot_voltage = slot0Configs.calculate(getPivotAngleDegrees(), pivot_angle);
+    m_periodicIO.intake_pivot_voltage = slot1.calculate(getPivotAngleDegrees(), pivot_angle);
 
     // If the pivot is at exactly 0.0, it's probably not connected, so disable it
     if (getPivotAngleDegrees() == 0.0) {

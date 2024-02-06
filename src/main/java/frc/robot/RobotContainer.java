@@ -18,15 +18,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
+    public final Joystick operator = new Joystick(1); 
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -39,6 +34,8 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
+    private final Shooter s_Shooter = new Shooter();
+    //private final Intake i_intake = Intake.getInstance();
 
      /* AutoChooser */
      private final SendableChooser<Command> autoChooser;
@@ -77,6 +74,10 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        
+        //Temporary Shooter Buttons
+        new JoystickButton(operator, 1).whileTrue(new ShooterCommand(s_Shooter, -0.5));
+        new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, 0.5));
     }
 
     /**

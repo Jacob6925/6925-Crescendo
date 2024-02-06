@@ -9,27 +9,19 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
-  /*
-   * get all motors
-   * inverse motors that need inversing
-   * 
-   * TODO
-   * update with proper device IDs
-   * update configs (TalonFX#getConfigurator())
-   */
-  private final TalonFX topMotor = new TalonFX(0);
-  private final TalonFX bottomMotor = new TalonFX(0);
+  private final TalonFX topMotor = new TalonFX(12);
+  private final TalonFX bottomMotor = new TalonFX(13);
 
-  private final double MAX_VELOCITY = 0.0;
+  public static final double MAX_VELOCITY = 0.5;
 
   public Shooter() {
     topMotor.setInverted(false);
     bottomMotor.setInverted(true);
   }
 
-  public void activate() {
-    topMotor.set(MAX_VELOCITY);
-    bottomMotor.set(MAX_VELOCITY);
+  public void activate(double s) {
+    topMotor.set(s);
+    bottomMotor.set(s);
   }
   
   public void disable() {

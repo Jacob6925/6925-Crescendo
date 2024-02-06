@@ -1,9 +1,12 @@
 package frc.robot;
 
+//import java.util.ArrayList;
+//import java.util.List;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-import edu.wpi.first.wpilibj.GenericHID;
+//import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -33,12 +36,16 @@ public class RobotContainer {
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
+    //private List<Subsystem> m_allSubsystems = new ArrayList<>();
     private final Swerve s_Swerve = new Swerve();
     private final Shooter s_Shooter = new Shooter();
     //private final Intake i_intake = Intake.getInstance();
 
      /* AutoChooser */
      private final SendableChooser<Command> autoChooser;
+
+     double speed = 0;
+   
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -65,19 +72,26 @@ public class RobotContainer {
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
-    /**
-     * Use this method to define your button->command mappings. Buttons can be created by
-     * instantiating a {@link GenericHID} or one of its subclasses ({@link
-     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-     * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-     */
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        new JoystickButton(operator, 1).whileTrue(new ShooterCommand(s_Shooter, -0.5));
-        new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, 0.5));
+        new JoystickButton(operator, 3).whileTrue(new ShooterCommand(s_Shooter, -0.5));
+        new JoystickButton(operator, 5).whileTrue(new ShooterCommand(s_Shooter, 0.5));
+
+        //Temporary Intake Buttons
+        //new JoystickButton(operator, 6).onTrue(i_intake.goToGround());
+        //new JoystickButton(operator, 7).onTrue(i_intake.goToSource());
+        //new JoystickButton(operator, 8).onTrue(i_intake.goToAmp());
+        //new JoystickButton(operator, 9).onTrue(i_intake.goToStow());
+
+        //new JoystickButton(operator, 10).whileTrue(i_intake.intake());
+        //new JoystickButton(operator, 11).whileTrue(i_intake.pulse());
+        //new JoystickButton(operator, 12).whileTrue(i_intake.eject());
+        //new JoystickButton(operator, 13).whileTrue(i_intake.feedShooter());
+        //new JoystickButton(operator, 14).whileTrue(i_intake.stopIntake());
+        //new JoystickButton(operator, 15).whileTrue(i_intake.pulse());
     }
 
     /**

@@ -1,32 +1,19 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix6.StatusSignal;
-import com.ctre.phoenix6.configs.Slot0Configs;
-import com.ctre.phoenix6.configs.Slot1Configs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.DutyCycleOut;
-import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.drive.RobotDriveBase.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants;
 import frc.robot.Helpers;
 
 public class Intake extends Subsystem {
 
-    private final TalonFX pivotMotor;
-    private final TalonFX intakeMotor;
+    private final TalonFX pivotMotor = new TalonFX(1);
+    private final TalonFX intakeMotor =  new TalonFX(2);
     private final DigitalInput m_IntakeLimitSwitch = new DigitalInput(0);
 
     // Pivot set point angles
@@ -40,8 +27,11 @@ public class Intake extends Subsystem {
     public static final double k_ejectSpeed = -0.45;
     public static final double k_feedShooterSpeed = -0.5;
 
-    private final TalonFXConfiguration pivotConfig = new TalonFXConfiguration();
-    private final TalonFXConfiguration intakeConfig = new TalonFXConfiguration();
+    private static final double k_pivotMotorP = 0.12;
+    private static final double k_pivotMotorI = 0.0;
+    private static final double k_pivotMotorD = 0.001;
+  
+    private final PIDController m_pivotPID = new PIDController(k_pivotMotorP, k_pivotMotorI, k_pivotMotorD);
 
 /*-------------------------------- Private instance variables ---------------------------------*/
     private static Intake mInstance;
@@ -55,24 +45,8 @@ public class Intake extends Subsystem {
     }
 
     private Intake() {
-    super("Intake");
-    
-    Slot0Configs slot0 = intakeConfig.Slot0;
-    slot0.kP = 0;
-    slot0.kI = 0;
-    slot0.kD = 0;
 
-    Slot1Configs slot1 = pivotConfig.Slot1;
-    slot1.kP = 0;
-    slot1.kI = 0;
-    slot1.kD = 0;
-
-    intakeMotor = new TalonFX(1);
-    intakeMotor.getConfigurator().apply(slot0);
-
-    pivotMotor = new TalonFX(2);
-    pivotMotor.getConfigurator().apply(slot1);
-  
+    super("Intake"); 
     m_periodicIO = new PeriodicIO();
     
   }
@@ -110,7 +84,7 @@ public class Intake extends Subsystem {
 
     // Pivot control
     double pivot_angle = pivotTargetToAngle(m_periodicIO.pivot_target);
-    m_periodicIO.intake_pivot_voltage = slot1.calculate(getPivotAngleDegrees(), pivot_angle);
+    m_periodicIO.intake_pivot_voltage = m_pivotPID.calculate(getPivotAngleDegrees(), pivot_angle);
 
     // If the pivot is at exactly 0.0, it's probably not connected, so disable it
     if (getPivotAngleDegrees() == 0.0) {
@@ -139,10 +113,7 @@ public class Intake extends Subsystem {
     SmartDashboard.putNumber("Speed", intakeStateToSpeed(m_periodicIO.intake_state));
     SmartDashboard.putNumber("Pivot/Abs Enc (getPivotAngleDegrees)", getPivotAngleDegrees());
     SmartDashboard.putNumber("Pivot/Setpoint", pivotTargetToAngle(m_periodicIO.pivot_target));
-
     SmartDashboard.putNumber("Pivot/Power", m_periodicIO.intake_pivot_voltage);
-    SmartDashboard.putNumber("Pivot/Current", pivotMotor.getOutputCurrent());
-
     SmartDashboard.putBoolean("Limit Switch", getIntakeHasNote());
   }
 

@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -27,7 +28,6 @@ public class Intake extends Subsystem {
     private final TalonFX pivotMotor;
     private final TalonFX intakeMotor;
     private final DigitalInput m_IntakeLimitSwitch = new DigitalInput(0);
-
 
     // Pivot set point angles
     public static final double k_pivotAngleGround = 60;
@@ -110,7 +110,7 @@ public class Intake extends Subsystem {
     m_periodicIO.intake_pivot_voltage = slot0Configs.calculate(getPivotAngleDegrees(), pivot_angle);
 
     // If the pivot is at exactly 0.0, it's probably not connected, so disable it
-    if (m_pivotEncoder.get() == 0.0) {
+    if (getPivotAngleDegrees() == 0.0) {
       m_periodicIO.intake_pivot_voltage = 0.0;
     }
 
@@ -134,8 +134,6 @@ public class Intake extends Subsystem {
   @Override
   public void outputTelemetry() {
     SmartDashboard.putNumber("Speed", intakeStateToSpeed(m_periodicIO.intake_state));
-    SmartDashboard.putNumber("Pivot/Abs Enc (get)", m_pivotEncoder.get());
-    SmartDashboard.putNumber("Pivot/Abs Enc (getAbsolutePosition)", m_pivotEncoder.getAbsolutePosition());
     SmartDashboard.putNumber("Pivot/Abs Enc (getPivotAngleDegrees)", getPivotAngleDegrees());
     SmartDashboard.putNumber("Pivot/Setpoint", pivotTargetToAngle(m_periodicIO.pivot_target));
 
@@ -194,8 +192,9 @@ public class Intake extends Subsystem {
 
   public double getPivotAngleDegrees() {
     
-    //double value = pivotMotor.getSelectedSensorPosition();
-    //return Units.rotationsToDegrees(Helpers.modRotations(value));
+    double value = pivotMotor.getPosition().getValue();
+    return Units.rotationsToDegrees(Helpers.modRotations(value));
+    
   }
 
   public boolean getIntakeHasNote() {
@@ -269,75 +268,4 @@ public class Intake extends Subsystem {
   private boolean isPivotAtTarget() {
     return Math.abs(getPivotAngleDegrees() - pivotTargetToAngle(m_periodicIO.pivot_target)) < 5;
   }
-
-
-
-
-
-
-
-
- /*     public Intake(){
-        wristMotor.config(NeutralMode.Brake);
-        intakeMotor.setNeutralMode(NeutralMode.Brake);
-
-        wristMotor.configFactoryDefault();
-        intakeMotor.configFactoryDefault();
-
-        final TalonFXConfiguration wrist = new TalonFXConfiguration();
-        wrist.peakOutputForward = 0.5;  // [0, 1], 0 being no output allowed, 1 being full forward output
-        wrist.peakOutputReverse = -0.5;  // [-1, 0], 0 being no output allowed, -1 being full reverse output
-        wrist.slot0.kP = 0.2;
-        wrist.slot0.kD = 0.2;
-
-        // Configure the TalonFX with the TalonFXConfiguration object 
-        wristMotor.configAllSettings(wrist);
-        wristMotor.setSelectedSensorPosition(0);
-
-        final TalonFXConfiguration intake = new TalonFXConfiguration();
-        intake.peakOutputForward = 0.5;  // [0, 1], 0 being no output allowed, 1 being full forward output
-        intake.peakOutputReverse = -0.5;  // [-1, 0], 0 being no output allowed, -1 being full reverse output
-
-        // Configure the TalonFX with the TalonFXConfiguration object 
-        intakeMotor.configAllSettings(intake);
-    }
-
-    private double PositionDutyCycle(double d) {
-         final PositionDutyCycle motorRequest = new PositionDutyCycle(d);
-    }
-
-    final DutyCycleOut motorRequest = new DutyCycleOut(0.0);
-    public Command wristGround(){
-        return this.runOnce(() -> wristMotor.set(PositionDutyCycle(0.0)));
-
-    }
-
-    public Command wristHandoff(){
-        return this.runOnce(() -> wristMotor.set(ControlMode.Position, 0));
-
-    }
-
-    public Command wristAmp(){
-        return this.runOnce(() -> wristMotor.set(ControlMode.Position, 0));
-
-    }
-
-    public Command wristZero(){
-        return this.runOnce(() -> wristMotor.set(ControlMode.Position, 0));
-
-    }
-
-    public void SwingArmOff(){
-        wristMotor.set(ControlMode.PercentOutput, 0);
-    }
-    
-    public void zeroPosition(){
-        wristMotor.setSelectedSensorPosition(0);
-    }
-
-    @Override
-    public void periodic(){
-        SmartDashboard.putNumber("Intake Position", wristMotor.getSelectedSensorPosition());
-    }
-    */
 }

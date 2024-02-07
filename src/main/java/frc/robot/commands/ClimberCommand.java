@@ -32,4 +32,3 @@ public class ClimberCommand extends Command{
         return false;
     }
 }
-

@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.*;
+import frc.robot.commands.intake.IntakeCommand;
+import frc.robot.commands.intake.IntakeData;
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
@@ -81,7 +83,7 @@ public class RobotContainer {
         new JoystickButton(operator, 5).whileTrue(new ShooterCommand(s_Shooter, 0.35));
 
         //Temporary Intake Buttons
-        new JoystickButton(operator, 6).toggleOnTrue(i_intake.goToGround());
+        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(i_intake).goToGround());
         new JoystickButton(operator, 7).onTrue(i_intake.goToSource());
         new JoystickButton(operator, 8).onTrue(i_intake.goToAmp());
         new JoystickButton(operator, 9).onTrue(i_intake.goToStow());

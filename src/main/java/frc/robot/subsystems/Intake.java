@@ -7,75 +7,10 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Helpers;
 
 public class Intake extends Subsystem {
-
-    private final TalonFX pivotMotor = new TalonFX(1);
-    private final TalonFX intakeMotor =  new TalonFX(2);
-    private final DigitalInput m_IntakeLimitSwitch = new DigitalInput(0);
-
-    // Pivot set point angles
-    public static final double k_pivotAngleGround = 60;
-    public static final double k_pivotAngleSource = 190;
-    public static final double k_pivotAngleAmp = 190;
-    public static final double k_pivotAngleStow = 27;
-    
-    // Intake speeds
-    public static final double k_intakeSpeed = 0.7;
-    public static final double k_ejectSpeed = -0.45;
-    public static final double k_feedShooterSpeed = -0.5;
-
-    private static final double k_pivotMotorP = 0.12;
-    private static final double k_pivotMotorI = 0.0;
-    private static final double k_pivotMotorD = 0.001;
-  
-    private final PIDController m_pivotPID = new PIDController(k_pivotMotorP, k_pivotMotorI, k_pivotMotorD);
-
-/*-------------------------------- Private instance variables ---------------------------------*/
-    private static Intake mInstance;
-    private PeriodicIO m_periodicIO;
-
-    public static Intake getInstance() {
-      if (mInstance == null) {
-        mInstance = new Intake();
-      }
-      return mInstance;
-    }
-
-    private Intake() {
-
-    super("Intake"); 
-    m_periodicIO = new PeriodicIO();
-    
-  }
-
-    private static class PeriodicIO {
-        // Input: Desired state
-        PivotTarget pivot_target = PivotTarget.STOW;
-        IntakeState intake_state = IntakeState.NONE;
-    
-        // Output: Motor set values
-        double intake_pivot_voltage = 0.0;
-        double intake_speed = 0.0;
-      }
-      public enum PivotTarget {
-        NONE,
-        GROUND,
-        SOURCE,
-        AMP,
-        STOW
-      }
-    
-      public enum IntakeState {
-        NONE,
-        INTAKE,
-        EJECT,
-        PULSE,
-        FEED_SHOOTER,
-      }
-
  /*-------------------------------- Generic Subsystem Functions --------------------------------*/
 
   @Override
@@ -178,45 +113,47 @@ public class Intake extends Subsystem {
   }
 
   // Pivot helper functions
-  public Command goToGround() {
+  public void goToGround() {
     m_periodicIO.pivot_target = PivotTarget.GROUND;
     m_periodicIO.intake_state = IntakeState.INTAKE;
     
   }
 
-  public Command goToSource() {
+  public void goToSource() {
     m_periodicIO.pivot_target = PivotTarget.SOURCE;
     m_periodicIO.intake_state = IntakeState.NONE;
   }
 
-  public Command goToAmp() {
+  public void goToAmp() {
     m_periodicIO.pivot_target = PivotTarget.SOURCE;
     m_periodicIO.intake_state = IntakeState.NONE;
   }
 
-  public Command goToStow() {
+  public void goToStow() {
     m_periodicIO.pivot_target = PivotTarget.STOW;
     m_periodicIO.intake_state = IntakeState.NONE;
+
+
   }
 
   // Intake helper functions
-  public Command intake() {
+  public void intake() {
     m_periodicIO.intake_state = IntakeState.INTAKE;
   }
 
-  public Command eject() {
+  public void eject() {
     m_periodicIO.intake_state = IntakeState.EJECT;
   }
 
-  public Command pulse() {
+  public void pulse() {
     m_periodicIO.intake_state = IntakeState.PULSE;
   }
 
-  public Command feedShooter() {
+  public void feedShooter() {
     m_periodicIO.intake_state = IntakeState.FEED_SHOOTER;
   }
 
-  public Command stopIntake() {
+  public void stopIntake() {
     m_periodicIO.intake_state = IntakeState.NONE;
     m_periodicIO.intake_speed = 0.0;
   }

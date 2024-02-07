@@ -39,7 +39,7 @@ public class RobotContainer {
     //private List<Subsystem> m_allSubsystems = new ArrayList<>();
     private final Swerve s_Swerve = new Swerve();
     private final Shooter s_Shooter = new Shooter();
-    //private final Intake i_intake = Intake.getInstance();
+    private final Intake i_intake = Intake.getInstance();
 
      /* AutoChooser */
      private final SendableChooser<Command> autoChooser;
@@ -81,17 +81,17 @@ public class RobotContainer {
         new JoystickButton(operator, 5).whileTrue(new ShooterCommand(s_Shooter, 0.35));
 
         //Temporary Intake Buttons
-        //new JoystickButton(operator, 6).onTrue(i_intake.goToGround());
-        //new JoystickButton(operator, 7).onTrue(i_intake.goToSource());
-        //new JoystickButton(operator, 8).onTrue(i_intake.goToAmp());
-        //new JoystickButton(operator, 9).onTrue(i_intake.goToStow());
+        new JoystickButton(operator, 6).toggleOnTrue(i_intake.goToGround());
+        new JoystickButton(operator, 7).onTrue(i_intake.goToSource());
+        new JoystickButton(operator, 8).onTrue(i_intake.goToAmp());
+        new JoystickButton(operator, 9).onTrue(i_intake.goToStow());
 
-        //new JoystickButton(operator, 10).whileTrue(i_intake.intake());
-        //new JoystickButton(operator, 11).whileTrue(i_intake.pulse());
-        //new JoystickButton(operator, 12).whileTrue(i_intake.eject());
-        //new JoystickButton(operator, 13).whileTrue(i_intake.feedShooter());
-        //new JoystickButton(operator, 14).whileTrue(i_intake.stopIntake());
-        //new JoystickButton(operator, 15).whileTrue(i_intake.pulse());
+        new JoystickButton(operator, 10).whileTrue(i_intake.intake());
+        new JoystickButton(operator, 11).whileTrue(i_intake.pulse());
+        new JoystickButton(operator, 12).whileTrue(i_intake.eject());
+        new JoystickButton(operator, 13).whileTrue(i_intake.feedShooter());
+        new JoystickButton(operator, 14).whileTrue(i_intake.stopIntake());
+    
     }
 
     /**

@@ -7,7 +7,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Helpers;
 
 public class Intake extends Subsystem {
@@ -178,44 +178,45 @@ public class Intake extends Subsystem {
   }
 
   // Pivot helper functions
-  public void goToGround() {
+  public Command goToGround() {
     m_periodicIO.pivot_target = PivotTarget.GROUND;
     m_periodicIO.intake_state = IntakeState.INTAKE;
+    
   }
 
-  public void goToSource() {
+  public Command goToSource() {
     m_periodicIO.pivot_target = PivotTarget.SOURCE;
     m_periodicIO.intake_state = IntakeState.NONE;
   }
 
-  public void goToAmp() {
+  public Command goToAmp() {
     m_periodicIO.pivot_target = PivotTarget.SOURCE;
     m_periodicIO.intake_state = IntakeState.NONE;
   }
 
-  public void goToStow() {
+  public Command goToStow() {
     m_periodicIO.pivot_target = PivotTarget.STOW;
     m_periodicIO.intake_state = IntakeState.NONE;
   }
 
   // Intake helper functions
-  public void intake() {
+  public Command intake() {
     m_periodicIO.intake_state = IntakeState.INTAKE;
   }
 
-  public void eject() {
+  public Command eject() {
     m_periodicIO.intake_state = IntakeState.EJECT;
   }
 
-  public void pulse() {
+  public Command pulse() {
     m_periodicIO.intake_state = IntakeState.PULSE;
   }
 
-  public void feedShooter() {
+  public Command feedShooter() {
     m_periodicIO.intake_state = IntakeState.FEED_SHOOTER;
   }
 
-  public void stopIntake() {
+  public Command stopIntake() {
     m_periodicIO.intake_state = IntakeState.NONE;
     m_periodicIO.intake_speed = 0.0;
   }

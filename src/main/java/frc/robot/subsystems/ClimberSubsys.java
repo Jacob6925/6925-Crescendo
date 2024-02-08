@@ -4,12 +4,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Climber extends SubsystemBase {
+public class ClimberSubsys extends SubsystemBase {
 
     private final TalonFX climberRight = new TalonFX(14);
     private final TalonFX climberLeft = new TalonFX(15);
 
-    public Climber(){
+    public ClimberSubsys(){
 
     }
  

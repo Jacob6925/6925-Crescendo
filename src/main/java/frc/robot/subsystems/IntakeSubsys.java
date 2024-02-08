@@ -14,7 +14,7 @@ public class IntakeSubsys extends SubsystemBase {
   /*
    * Constants for this class
    * TODO: modify angles, intake speeds, and PID values
-   */
+   */ 
   private static final TalonFX pivotMotor = new TalonFX(1);
   private static final TalonFX intakeMotor =  new TalonFX(2);
   private static final DigitalInput intakeLimitSwitch = new DigitalInput(0);
@@ -47,7 +47,7 @@ public class IntakeSubsys extends SubsystemBase {
   private static double intakeSpeed = 0;
 
   private enum PivotTarget {
-    NONE(-1),
+    NONE(Double.MAX_VALUE),
     GROUND(k_pivotAngleGround),
     SOURCE(k_pivotAngleSource),
     AMP(k_pivotAngleAmp),
@@ -91,8 +91,7 @@ public class IntakeSubsys extends SubsystemBase {
 
   public void goToSource() {
     pivotTarget = PivotTarget.SOURCE;
-    intakeState = IntakeState.FEED_SHOOTER;
-    // TODO: should this be the above or intakeState = IntakeState.NONE; ?
+    intakeState = IntakeState.NONE;
   }
 
   public void goToAmp() {
@@ -126,13 +125,6 @@ public class IntakeSubsys extends SubsystemBase {
     intakeState = IntakeState.NONE;
   }
 
-
-
-
-
-
-
-  
   @Override
   public void periodic() {
     if (intakeState == IntakeState.PULSE) {
@@ -145,29 +137,23 @@ public class IntakeSubsys extends SubsystemBase {
       }
     }
 
-    if (pivotTarget.getAngle() != -1.0) {
-      // TODO: write code for setting motor to position based on angle
-    }
+
 
     if (pivotTarget == PivotTarget.GROUND && intakeHasNote() && isPivotAtTarget()) {
       intakeState = IntakeState.PULSE;
-      pivotTarget = PivotTarget.STOW; // TODO: is this the right position for when a note is detected, or should it be NONE
+      pivotTarget = PivotTarget.STOW; 
     }
 
-    // TODO: implement PID
-    // maybe code below? idk
-    /*
     // Pivot control
-    double pivotAngle = pivotTarget.getAngle();
-    if (pivotAngle != -1.0) {
-      intakePivotVoltage = m_pivotPID.calculate(getPivotAngleDegrees(), pivotAngle);
+    if (pivotTarget != PivotTarget.NONE) {
+      intakePivotVoltage = m_pivotPID.calculate(getPivotAngleDegrees(), pivotTarget.getAngle());
     }
 
     // If the pivot is at exactly 0.0, it's probably not connected, so disable it
     if (getPivotAngleDegrees() == 0.0) {
       intakePivotVoltage = 0.0;
     }
-    */
+  
 
     intakeSpeed = intakeState.getSpeed();
     outputTelemetry();
@@ -194,7 +180,6 @@ public class IntakeSubsys extends SubsystemBase {
 
   public void outputTelemetry() {
     SmartDashboard.putString("Intake State", intakeState.toString());
-
     SmartDashboard.putNumber("Speed", intakeSpeed);
     SmartDashboard.putNumber("Pivot/Abs Enc (getPivotAngleDegrees)", getPivotAngleDegrees());
     SmartDashboard.putNumber("Pivot/Setpoint", pivotTarget.getAngle());

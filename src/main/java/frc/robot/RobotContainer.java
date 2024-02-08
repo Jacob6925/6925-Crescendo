@@ -1,12 +1,8 @@
 package frc.robot;
 
-//import java.util.ArrayList;
-//import java.util.List;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-//import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,11 +13,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.commands.*;
-import frc.robot.commands.intake.IntakeCommand;
-import frc.robot.commands.intake.IntakeData;
-import frc.robot.subsystems.*;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.TeleopSwerve;
+import frc.robot.subsystems.IntakeSubsys;
+import frc.robot.subsystems.ShooterSubsys;
+import frc.robot.subsystems.SwerveSubsys;
 
 public class RobotContainer {
     /* Controllers */
@@ -39,28 +36,16 @@ public class RobotContainer {
 
     /* Subsystems */
     //private List<Subsystem> m_allSubsystems = new ArrayList<>();
-    private final Swerve s_Swerve = new Swerve();
-    private final Shooter s_Shooter = new Shooter();
-    private final Intake i_intake = Intake.getInstance();
+    private final SwerveSubsys s_Swerve = new SwerveSubsys();
+    private final ShooterSubsys s_Shooter = new ShooterSubsys();
+    private final IntakeSubsys s_intake = new IntakeSubsys();
 
      /* AutoChooser */
      private final SendableChooser<Command> autoChooser;
-
-     double speed = 0;
    
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        s_Swerve.setDefaultCommand(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
-            )
-        );
-
         // Configure the button bindings
         configureButtonBindings();
         
@@ -76,6 +61,15 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         /* Driver Buttons */
+        s_Swerve.setDefaultCommand(
+            new TeleopSwerve(
+                s_Swerve, 
+                () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(strafeAxis), 
+                () -> -driver.getRawAxis(rotationAxis), 
+                () -> robotCentric.getAsBoolean()
+            )
+        );
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
@@ -83,16 +77,16 @@ public class RobotContainer {
         new JoystickButton(operator, 5).whileTrue(new ShooterCommand(s_Shooter, 0.35));
 
         //Temporary Intake Buttons
-        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(i_intake).goToGround());
-        new JoystickButton(operator, 7).onTrue(i_intake.goToSource());
-        new JoystickButton(operator, 8).onTrue(i_intake.goToAmp());
-        new JoystickButton(operator, 9).onTrue(i_intake.goToStow());
+        new JoystickButton(operator, 6).onTrue(new IntakeCommand(s_intake).goToGround());
+        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake).goToSource());
+        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake).goToAmp());
+        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake).goToStow());
 
-        new JoystickButton(operator, 10).whileTrue(i_intake.intake());
-        new JoystickButton(operator, 11).whileTrue(i_intake.pulse());
-        new JoystickButton(operator, 12).whileTrue(i_intake.eject());
-        new JoystickButton(operator, 13).whileTrue(i_intake.feedShooter());
-        new JoystickButton(operator, 14).whileTrue(i_intake.stopIntake());
+        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake).intake());
+        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake).pulse());
+        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_intake).eject());
+        new JoystickButton(operator, 13).whileTrue(new IntakeCommand(s_intake).feedShooter());
+        new JoystickButton(operator, 14).whileTrue(new IntakeCommand(s_intake).stopIntake());
     
     }
 

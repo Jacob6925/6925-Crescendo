@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Helpers;
+import frc.lib.math.Conversions;
 
 public class IntakeSubsys extends SubsystemBase {
   /*
@@ -17,19 +17,19 @@ public class IntakeSubsys extends SubsystemBase {
    */
   private static final TalonFX pivotMotor = new TalonFX(1);
   private static final TalonFX intakeMotor =  new TalonFX(2);
-  private static final DigitalInput intakeLimitSwitch = new DigitalInput(0); // TODO: make code for limit switch
-  private final double PULSE_VOLTAGE = 5.0;
+  private static final DigitalInput intakeLimitSwitch = new DigitalInput(0);
 
   // Pivot set point angles
-  private static final double k_pivotAngleGround = 60;
-  private static final double k_pivotAngleSource = 190;
-  private static final double k_pivotAngleAmp = 190;
+  private static final double k_pivotAngleGround = 5;
+  private static final double k_pivotAngleSource = 90;
+  private static final double k_pivotAngleAmp = 90;
   private static final double k_pivotAngleStow = 27;
   
   // Intake speeds
   private static final double k_intakeSpeed = 0.7;
   private static final double k_ejectSpeed = -0.45;
   private static final double k_feedShooterSpeed = -0.5;
+  private static final double k_pulseSpeed = k_intakeSpeed;
 
   private final double k_pivotMotorP = 0.12;
   private final double k_pivotMotorI = 0.0;
@@ -55,9 +55,6 @@ public class IntakeSubsys extends SubsystemBase {
 
     private PivotTarget(double angle) {
       this.angle = angle;
-      if (angle != -1.0) {
-        // TODO: write code for setting motor to position 
-      }
     }
 
     private final double angle;
@@ -70,19 +67,14 @@ public class IntakeSubsys extends SubsystemBase {
     NONE(0.0),
     INTAKE(k_intakeSpeed),
     EJECT(k_ejectSpeed),
-    PULSE(0.3, true), // TODO: update speed
+    PULSE(k_pulseSpeed),
     FEED_SHOOTER(k_feedShooterSpeed);
-    
+ 
     private IntakeState(double speed) {
-      this(speed, false);
-    }
-    private IntakeState(double speed, boolean pulse) {
       intakeSpeed = speed;
       intakeMotor.set(speed);
 
       this.speed = speed;
-
-      // TODO: write code for pulse
     }
 
     private final double speed;
@@ -135,80 +127,48 @@ public class IntakeSubsys extends SubsystemBase {
   }
 
 
-  public void setState(IntakeState state) {
-    intakeState = state;
-  }
-
-  public void setPivotTarget(PivotTarget target) {
-    pivotTarget = target;
-  }
 
 
 
 
 
-
-
-  private int puleseCycles = 0;
   
   @Override
   public void periodic() {
-    // Pulse mode - turn on motor just a bit for 20ms every 100ms
     if (intakeState == IntakeState.PULSE) {
-      puleseCycles++;
-      if (puleseCycles == 5) {
-        intakeMotor.set(IntakeState.PULSE.getSpeed());
-      } else if (puleseCycles == 6) {
-        intakeMotor.set(0);
-        puleseCycles = 0;
+      // Use the timer to pulse the intake on for a 1/16 second,
+      // then off for a 15/16 second
+      if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
+        intakeSpeed = k_pulseSpeed;
+      } else {
+        intakeSpeed = 0;
       }
-    } else if (puleseCycles != 0) {
-      intakeMotor.set(0);
-      puleseCycles = 0;
     }
 
-    // if state is on ground, check for piece
-    // if piece detected, move to PivotTarget.STOW
+    if (pivotTarget.getAngle() != -1.0) {
+      // TODO: write code for setting motor to position based on angle
+    }
 
-
-
-    outputTelemetry();
-
-    pivotMotor.setVoltage(intakePivotVoltage);
-    intakeMotor.set(intakeSpeed);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
- /*-------------------------------- Generic Subsystem Functions --------------------------------*/
-  @Override
-  public void periodic() {
-    // If the pivot is set to GROUND AND the intake has a note AND the pivot is close to it's target,
-    // stop the intake and go to the SOURCE position
     if (pivotTarget == PivotTarget.GROUND && intakeHasNote() && isPivotAtTarget()) {
-      pivotTarget = PivotTarget.STOW;
-      intakeState = IntakeState.NONE;
+      intakeState = IntakeState.PULSE;
+      pivotTarget = PivotTarget.STOW; // TODO: is this the right position for when a note is detected, or should it be NONE
     }
 
+    // TODO: implement PID
+    // maybe code below? idk
+    /*
     // Pivot control
     double pivotAngle = pivotTarget.getAngle();
-    intakePivotVoltage = m_pivotPID.calculate(getPivotAngleDegrees(), pivotAngle);
+    if (pivotAngle != -1.0) {
+      intakePivotVoltage = m_pivotPID.calculate(getPivotAngleDegrees(), pivotAngle);
+    }
 
     // If the pivot is at exactly 0.0, it's probably not connected, so disable it
     if (getPivotAngleDegrees() == 0.0) {
       intakePivotVoltage = 0.0;
     }
+    */
 
-    // Intake control
     intakeSpeed = intakeState.getSpeed();
     outputTelemetry();
 
@@ -216,34 +176,10 @@ public class IntakeSubsys extends SubsystemBase {
     intakeMotor.set(intakeSpeed);
   }
 
-  public double intakeStateToSpeed(IntakeState state) {
-    switch (state) {
-      case INTAKE:
-        return k_intakeSpeed;
-      case EJECT:
-        return k_ejectSpeed;
-      case PULSE:
-        // Use the timer to pulse the intake on for a 1/16 second,
-        // then off for a 15/16 second
-        if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
-          return k_intakeSpeed;
-        }
-        return 0.0;
-      case FEED_SHOOTER:
-        return k_feedShooterSpeed;
-      default:
-        // "Safe" default
-        return 0.0;
-    }
-  }
-
-  /*---------------------------------- Custom Public Functions ----------------------------------*/
 
   public double getPivotAngleDegrees() {
-    
     double value = pivotMotor.getPosition().getValue();
-    return Units.rotationsToDegrees(Helpers.modRotations(value));
-    
+    return Units.rotationsToDegrees(Conversions.modRotations(value));
   }
 
   public boolean intakeHasNote() {
@@ -255,9 +191,6 @@ public class IntakeSubsys extends SubsystemBase {
   private boolean isPivotAtTarget() {
     return Math.abs(getPivotAngleDegrees() - pivotTarget.getAngle()) < 5;
   }
-
-
-
 
   public void outputTelemetry() {
     SmartDashboard.putString("Intake State", intakeState.toString());

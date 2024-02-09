@@ -4,9 +4,10 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsys extends SubsystemBase {
-
     private final TalonFX shooterMotorTop = new TalonFX(12);
     private final TalonFX shooterMotorBottom = new TalonFX(13);
+
+    private final double MAX_VALUE = 0.5;
     
     public ShooterSubsys(){
         shooterMotorBottom.setInverted(true);
@@ -18,13 +19,13 @@ public class ShooterSubsys extends SubsystemBase {
     }
     
     public void intake(){
-        shooterMotorTop.set(.5);
-        shooterMotorBottom.set(.5);
+        shooterMotorTop.set(MAX_VALUE);
+        shooterMotorBottom.set(MAX_VALUE);
     }
 
     public void outake(){
-        shooterMotorTop.set(-0.5);
-        shooterMotorBottom.set(-0.5);
+        shooterMotorTop.set(-MAX_VALUE);
+        shooterMotorBottom.set(-MAX_VALUE);
     }
 
     public void shooterOff(){

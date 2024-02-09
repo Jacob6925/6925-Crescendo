@@ -19,7 +19,7 @@ public class ShooterCommand extends Command{
 
     @Override
     public void execute(){
-        shooter.setMotor(speed);
+        if (speed != 0) shooter.setMotor(speed);
     }
 
     @Override
@@ -30,5 +30,15 @@ public class ShooterCommand extends Command{
     @Override
     public boolean isFinished(){
         return false;
+    }
+
+    public Command intake() {
+        shooter.intake();
+        return this;
+    }
+
+    public Command outtake() {
+        shooter.outake();
+        return this;
     }
 }

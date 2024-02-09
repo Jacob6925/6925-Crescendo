@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3754032049697344,
-      "y": 5.543606856845236
+      "x": 1.3949707899415804,
+      "y": 4.808302188032948
     },
-    "rotation": 0
+    "rotation": -21.501434324047818
   },
   "command": {
     "type": "sequential",
@@ -14,13 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TwoPiece"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Taxi"
+            "pathName": "Magic"
           }
         }
       ]

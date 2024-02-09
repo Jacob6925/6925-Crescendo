@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3754032049697344,
-      "y": 5.543606856845236
+      "x": 1.4682680793933023,
+      "y": 5.52661562465982
     },
     "rotation": 0
   },
@@ -14,19 +14,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TwoPiece"
+            "pathName": "M-P2"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Three-FourPiece"
+            "pathName": "M-P1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "FivePiece"
+            "pathName": "M-Taxi"
           }
         }
       ]

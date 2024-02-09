@@ -31,9 +31,9 @@ public class IntakeSubsys extends SubsystemBase {
   private static final double k_feedShooterSpeed = -0.5;
   private static final double k_pulseSpeed = k_intakeSpeed;
 
-  private final double k_pivotMotorP = 0.12;
+  private final double k_pivotMotorP = 1.0;
   private final double k_pivotMotorI = 0.0;
-  private final double k_pivotMotorD = 0.001;
+  private final double k_pivotMotorD = 0.0;
 
   private final PIDController m_pivotPID = new PIDController(k_pivotMotorP, k_pivotMotorI, k_pivotMotorD);
 
@@ -136,8 +136,6 @@ public class IntakeSubsys extends SubsystemBase {
         intakeSpeed = 0;
       }
     }
-
-
 
     if (pivotTarget == PivotTarget.GROUND && intakeHasNote() && isPivotAtTarget()) {
       intakeState = IntakeState.PULSE;

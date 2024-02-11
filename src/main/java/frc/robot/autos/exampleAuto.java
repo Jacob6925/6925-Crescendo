@@ -1,4 +1,6 @@
-package frc.robot.autos;
+//No longer used
+
+/*package frc.robot.autos;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsys;
@@ -58,4 +60,4 @@ public class exampleAuto extends SequentialCommandGroup {
             swerveControllerCommand
         );
     }
-}
+}*/

@@ -73,21 +73,19 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        new JoystickButton(operator, 3).whileTrue(new ShooterCommand(s_Shooter, -0.35));
-        new JoystickButton(operator, 5).whileTrue(new ShooterCommand(s_Shooter, 0.35));
+        new JoystickButton(operator, 1).whileTrue(new ShooterCommand(s_Shooter, -0.65));
+        new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
 
         //Temporary Intake Buttons
-        new JoystickButton(operator, 6).onTrue(new IntakeCommand(s_intake).goToGround());
+        new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake).feedShooter());
+        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake).goToGround());
+
         new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake).goToSource());
         new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake).goToAmp());
         new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake).goToStow());
-
         new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake).intake());
-        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake).pulse());
-        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_intake).eject());
-        new JoystickButton(operator, 13).whileTrue(new IntakeCommand(s_intake).feedShooter());
-        new JoystickButton(operator, 14).whileTrue(new IntakeCommand(s_intake).stopIntake());
-    
+        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake).eject());
+
     }
 
     /**

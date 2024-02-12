@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.util.SquaredInput;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopSwerve;
@@ -61,12 +62,17 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         /* Driver Buttons */
+        /*
+         * translationAxis = XboxController.Axis.kLeftY.value;
+         * strafeAxis      = XboxController.Axis.kLeftX.value;
+         * rotationAxis    = XboxController.Axis.kRightX.value;
+         */
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
+                () -> -SquaredInput.scale(Constants.stickDeadband, driver.getRawAxis(translationAxis)),
+                () -> -SquaredInput.scale(Constants.stickDeadband, driver.getRawAxis(strafeAxis)), 
+                () -> -SquaredInput.scale(Constants.stickDeadband, driver.getRawAxis(rotationAxis)), 
                 () -> robotCentric.getAsBoolean()
             )
         );

@@ -2,15 +2,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake.IntakeSubsys;
+import frc.robot.subsystems.Intake.IndexerSubsys;
 
 public class IntakeCommand extends Command {
     private final IntakeSubsys intake;
+    private final IndexerSubsys indexer;
     Runnable runnable;
 
-    public IntakeCommand(IntakeSubsys intake, Runnable runnable) {
+    public IntakeCommand(IntakeSubsys intake, IndexerSubsys indexer,Runnable runnable) {
         this.intake = intake;
+        this.indexer = indexer;
         this.runnable = runnable;
+
         addRequirements(intake);
+        addRequirements(indexer);
     }
 
     // Called when the command is initially scheduled.
@@ -26,7 +31,7 @@ public class IntakeCommand extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        intake.stopIntake();
+        indexer.stopIntake();
     }
 
     // Returns true when the command should end.
@@ -61,27 +66,27 @@ public class IntakeCommand extends Command {
     }
 
     public Command intake() {
-        intake.intake();
+        indexer.intake();
         return this;
     }
 
     public Command eject() {
-        intake.eject();
+        indexer.eject();
         return this;
     }
 
     public Command pulse() {
-        intake.pulse();
+        indexer.pulse();
         return this;
     }
 
     public Command feedShooter() {
-        intake.feedShooter();
+        indexer.feedShooter();
         return this;
     }
 
     public Command stopIntake() {
-        intake.stopIntake();
+        indexer.stopIntake();
         return this;
     }
 }

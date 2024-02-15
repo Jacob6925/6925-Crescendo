@@ -12,18 +12,13 @@ import frc.robot.Robot;
 
 public class PivotSubsys extends SubsystemBase {
 
-    private TalonFX pivotMotor;
+    private TalonFX pivotMotor = new TalonFX(15);
 
     private PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
     private DutyCycleOut intakePivotPercentOutput = new DutyCycleOut(0);
 
-    public static PivotState pivotState = PivotState.NONE;
-
     public PivotSubsys() {
-
-        pivotMotor = new TalonFX(15);
         configIntakePivotMotor();
-
     }
 
     public void intakePivot(double position) {
@@ -87,9 +82,7 @@ public class PivotSubsys extends SubsystemBase {
 
     @Override
     public void periodic() {
-
         SmartDashboard.putNumber("Intake Pivot Position", getIntakePivotPosition());
         SmartDashboard.putNumber("Intake Pivot Rotor Position", getIntakePivotRotorPosition());
-
     }
 }

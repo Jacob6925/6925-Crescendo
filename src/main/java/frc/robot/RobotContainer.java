@@ -18,7 +18,9 @@ import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
+import frc.robot.subsystems.Intake.IndexerSubsys;
 import frc.robot.subsystems.Intake.IntakeSubsys;
+import frc.robot.subsystems.Intake.PivotSubsys;
 
 public class RobotContainer {
     /* Controllers */
@@ -31,21 +33,23 @@ public class RobotContainer {
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    // private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+    // private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
     //private List<Subsystem> m_allSubsystems = new ArrayList<>();
-    private final SwerveSubsys s_Swerve = new SwerveSubsys();
+    // private final SwerveSubsys s_Swerve = new SwerveSubsys();
     private final ShooterSubsys s_Shooter = new ShooterSubsys();
     private final IntakeSubsys s_intake = new IntakeSubsys();
+    private final IndexerSubsys s_indexer = new IndexerSubsys();
 
      /* AutoChooser */
-     private final SendableChooser<Command> autoChooser;
+    //  private final SendableChooser<Command> autoChooser;
    
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+        new PivotSubsys();
         // Configure the button bindings
         configureButtonBindings();
         
@@ -55,36 +59,36 @@ public class RobotContainer {
         NamedCommands.registerCommand("print hello", Commands.print("hello"));
          
         //Auto chooser
-        autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
-        SmartDashboard.putData("Auto Mode", autoChooser);
+        // autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
+        // SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
     private void configureButtonBindings() {
-        /* Driver Buttons */
-        s_Swerve.setDefaultCommand(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
-            )
-        );
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        // /* Driver Buttons */
+        // s_Swerve.setDefaultCommand(
+        //     new TeleopSwerve(
+        //         s_Swerve, 
+        //         () -> -driver.getRawAxis(translationAxis), 
+        //         () -> -driver.getRawAxis(strafeAxis), 
+        //         () -> -driver.getRawAxis(rotationAxis), 
+        //         () -> robotCentric.getAsBoolean()
+        //     )
+        // );
+        // zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        // new JoystickButton(operator, 1).whileTrue(new ShooterCommand(s_Shooter, -0.65));
-        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
+        new JoystickButton(operator, 1).whileTrue(new ShooterCommand(s_Shooter, -0.65));
+        new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
 
         //Temporary Intake Buttons
-        // new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, () -> s_intake.feedShooter()));
-        // new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToGround()));
+        new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, s_indexer, () -> s_indexer.feedShooter()));
+        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, s_indexer, () -> s_intake.goToGround()));
 
-        // new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToSource()));
-        // new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToAmp()));
-        // new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToStow()));
-        // new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, () -> s_intake.intake()));
-        // new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, () -> s_intake.eject()));
+        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, s_indexer, () -> s_intake.goToSource()));
+        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, s_indexer, () -> s_intake.goToAmp()));
+        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, s_indexer, () -> s_intake.goToStow()));
+        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, s_indexer, () -> s_indexer.intake()));
+        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, s_indexer, () -> s_indexer.eject()));
 
     }
 
@@ -94,7 +98,8 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return autoChooser.getSelected();
+        // return autoChooser.getSelected();
+        return null;
     }
     
 }

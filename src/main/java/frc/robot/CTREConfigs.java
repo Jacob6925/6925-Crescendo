@@ -84,8 +84,8 @@ public final class CTREConfigs {
         intakePivotSlot0.kV = PivotConstants.INTAKE_PIVOT_V;
         
         /* Intake Pivot Feedback Config */
-        var intakePivotFeedback = intakePivotFXConfig.Feedback;
-        /* intakePivotFeedback.FeedbackRemoteSensorID = Constants.INTAKE_CANCODER_ID;
+        /*var intakePivotFeedback = intakePivotFXConfig.Feedback;
+        intakePivotFeedback.FeedbackRemoteSensorID = Constants.INTAKE_CANCODER_ID;
         intakePivotFeedback.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
         intakePivotFeedback.SensorToMechanismRatio = 1;
         intakePivotFeedback.RotorToSensorRatio = 25; */

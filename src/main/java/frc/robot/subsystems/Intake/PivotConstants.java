@@ -26,7 +26,7 @@ public class PivotConstants {
     public static final double k_pivotAngleSource = 90;
     public static final double k_pivotAngleAmp = 90;
     public static final double k_pivotAngleStow = 27;
-
+    
     /* Intake Pivot Motion Magic */
     public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;
     public static final double INTAKE_PIVOT_ACCELERATION = 140;

@@ -2,18 +2,12 @@ package frc.robot.subsystems.Intake;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
-import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
-import com.ctre.phoenix6.controls.VelocityDutyCycle;
-import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
-
-import frc.robot.subsystems.Intake.PivotConstants;
 
 
 public class PivotSubsys extends SubsystemBase {
@@ -23,7 +17,7 @@ public class PivotSubsys extends SubsystemBase {
     private PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
     private DutyCycleOut intakePivotPercentOutput = new DutyCycleOut(0);
 
-    private static PivotState pivotState = PivotState.NONE;
+    public static PivotState pivotState = PivotState.NONE;
 
     public PivotSubsys() {
 
@@ -84,9 +78,8 @@ public class PivotSubsys extends SubsystemBase {
         public double intakeSetpoint;
         public double intakeVelocity;
 
-        private PivotState(double pivotSetpoint, double intakeVelocity) {
+        private PivotState(double pivotSetpoint) {
             intakeSetpoint = pivotSetpoint;
-            this.intakeVelocity = intakeVelocity;
         }
 
     }
@@ -99,5 +92,4 @@ public class PivotSubsys extends SubsystemBase {
         SmartDashboard.putNumber("Intake Pivot Rotor Position", getIntakePivotRotorPosition());
 
     }
-    
 }

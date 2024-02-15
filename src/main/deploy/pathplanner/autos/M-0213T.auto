@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.4682680793933023,
+      "y": 5.52661562465982
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M-P2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M-P1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M-P3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M-Taxi"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

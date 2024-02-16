@@ -22,10 +22,10 @@ public class PivotConstants {
     public static final double INTAKE_PIVOT_V = 0; //0.01
 
     /* Intake Pivot Setpoints */
-    public static final double k_pivotAngleGround = 5;
-    public static final double k_pivotAngleSource = 90;
-    public static final double k_pivotAngleAmp = 90;
-    public static final double k_pivotAngleStow = 27;
+    public static final double INTAKE_PIVOT_GROUND = 1000; //TODO: Change these values
+    public static final double INTAKE_PIVOT_SOURCE = 1000;
+    public static final double INTAKE_PIVOT_AMP = 1000;
+    public static final double INTAKE_PIVOT_STOW = 1000;
     
     /* Intake Pivot Motion Magic */
     public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;

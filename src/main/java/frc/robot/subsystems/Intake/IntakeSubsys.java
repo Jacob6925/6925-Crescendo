@@ -10,6 +10,7 @@ import frc.robot.subsystems.Intake.PivotSubsys.PivotState;
  public class IntakeSubsys extends SubsystemBase {
 
     private static final DigitalInput intakeLimitSwitch = new DigitalInput(0);
+  
     public static PivotState pivotState = PivotState.NONE;
     private static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
 

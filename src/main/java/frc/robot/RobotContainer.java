@@ -42,6 +42,7 @@ public class RobotContainer {
     private final ShooterSubsys s_Shooter = new ShooterSubsys();
     private final IntakeSubsys s_intake = new IntakeSubsys();
     private final IndexerSubsys s_indexer = new IndexerSubsys();
+    private final PivotSubsys s_pivot = new PivotSubsys();
 
      /* AutoChooser */
     //  private final SendableChooser<Command> autoChooser;
@@ -49,7 +50,7 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        new PivotSubsys();
+        
         // Configure the button bindings
         configureButtonBindings();
         

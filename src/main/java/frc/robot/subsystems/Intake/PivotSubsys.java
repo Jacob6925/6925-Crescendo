@@ -61,14 +61,13 @@ public class PivotSubsys extends SubsystemBase {
 
     }
 
-
     public enum PivotState {
 
         NONE(Double.MAX_VALUE),
-        GROUND(PivotConstants.k_pivotAngleGround),
-        SOURCE(PivotConstants.k_pivotAngleSource),
-        AMP(PivotConstants.k_pivotAngleAmp),
-        STOW(PivotConstants.k_pivotAngleStow);
+        GROUND(PivotConstants.INTAKE_PIVOT_GROUND),
+        SOURCE(PivotConstants.INTAKE_PIVOT_SOURCE),
+        AMP(PivotConstants.INTAKE_PIVOT_AMP),
+        STOW(PivotConstants.INTAKE_PIVOT_STOW);
 
         public double intakeSetpoint;
         public double intakeVelocity;
@@ -78,7 +77,6 @@ public class PivotSubsys extends SubsystemBase {
         }
 
     }
-
 
     @Override
     public void periodic() {

@@ -19,7 +19,7 @@ public final class Constants {
         public static final int pigeonID = 1;
 
         public static final COTSTalonFXSwerveConstants chosenModule = 
-        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
+        COTSTalonFXSwerveConstants.SDS.MK4i.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.SDSMK4i_L3_16T);
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(22.75); 
@@ -67,7 +67,7 @@ public final class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = 0.05; 
+        public static final double driveKP = 0.12; 
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;

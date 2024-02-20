@@ -18,9 +18,7 @@ import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
-import frc.robot.subsystems.Intake.IndexerSubsys;
 import frc.robot.subsystems.Intake.IntakeSubsys;
-import frc.robot.subsystems.Intake.PivotSubsys;
 
 public class RobotContainer {
     /* Controllers */
@@ -41,8 +39,6 @@ public class RobotContainer {
     // private final SwerveSubsys s_Swerve = new SwerveSubsys();
     private final ShooterSubsys s_Shooter = new ShooterSubsys();
     private final IntakeSubsys s_intake = new IntakeSubsys();
-    private final IndexerSubsys s_indexer = new IndexerSubsys();
-    private final PivotSubsys s_pivot = new PivotSubsys();
 
      /* AutoChooser */
     //  private final SendableChooser<Command> autoChooser;
@@ -82,14 +78,14 @@ public class RobotContainer {
         new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
 
         //Temporary Intake Buttons
-        new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_indexer.feedShooter()));
-        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_pivot.goToGround()));
+        new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, () -> s_intake.feedShooter()));
+        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToGround()));
 
-        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_pivot.goToSource()));
-        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_pivot.goToAmp()));
-        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_pivot.goToStow()));
-        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_indexer.intake()));
-        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, s_indexer, s_pivot, () -> s_indexer.eject()));
+        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToSource()));
+        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToAmp()));
+        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToStow()));
+        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, () -> s_intake.intake()));
+        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, () -> s_intake.eject()));
 
     }
 

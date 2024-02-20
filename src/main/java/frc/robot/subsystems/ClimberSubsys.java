@@ -22,8 +22,7 @@ public class ClimberSubsys extends SubsystemBase {
         climberLeft.set(0);
         climberRight.set(0);
     }
-
-    
+ 
     @Override
     public void periodic(){
     }

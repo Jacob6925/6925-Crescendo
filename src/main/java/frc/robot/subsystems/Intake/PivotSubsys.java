@@ -17,6 +17,8 @@ public class PivotSubsys extends SubsystemBase {
     private PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
     private DutyCycleOut intakePivotPercentOutput = new DutyCycleOut(0);
 
+    public static PivotState pivotState = PivotState.NONE;
+
     public PivotSubsys() {
         configIntakePivotMotor();
     }
@@ -69,13 +71,28 @@ public class PivotSubsys extends SubsystemBase {
         AMP(PivotConstants.INTAKE_PIVOT_AMP),
         STOW(PivotConstants.INTAKE_PIVOT_STOW);
 
-        public double intakeSetpoint;
-        public double intakeVelocity;
+        public double setPoint;
 
-        private PivotState(double pivotSetpoint) {
-            intakeSetpoint = pivotSetpoint;
+        PivotState(double setPoint) {
+            setPoint = this.setPoint;
         }
 
+    }
+
+    public void goToGround() {
+        pivotState = PivotState.GROUND;
+    }
+
+    public void goToSource() {
+        pivotState = PivotState.SOURCE;
+    }
+
+    public void goToAmp() {
+        pivotState = PivotState.SOURCE;
+    }
+
+    public void goToStow() {
+        pivotState = PivotState.STOW;
     }
 
     @Override

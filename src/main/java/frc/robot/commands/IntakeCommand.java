@@ -3,19 +3,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IndexerSubsys;
+import frc.robot.subsystems.Intake.PivotSubsys;
 
 public class IntakeCommand extends Command {
     private final IntakeSubsys intake;
     private final IndexerSubsys indexer;
+    private final PivotSubsys pivot;
     Runnable runnable;
 
-    public IntakeCommand(IntakeSubsys intake, IndexerSubsys indexer,Runnable runnable) {
+    public IntakeCommand(IntakeSubsys intake, IndexerSubsys indexer, PivotSubsys pivot, Runnable runnable) {
         this.intake = intake;
         this.indexer = indexer;
         this.runnable = runnable;
+        this.pivot = pivot;
 
         addRequirements(intake);
         addRequirements(indexer);
+        addRequirements(pivot);
     }
 
     // Called when the command is initially scheduled.
@@ -46,22 +50,22 @@ public class IntakeCommand extends Command {
      * Each method returns the instance of this class so that it can be coded to be called when a button is pressed
      */
     public Command goToGround() {
-        intake.goToGround();
+        pivot.goToGround();
         return this;
     }
 
     public Command goToSource() {
-        intake.goToSource();
+        pivot.goToSource();
         return this;
     }
 
     public Command goToAmp() {
-        intake.goToAmp();
+        pivot.goToAmp();
         return this;
     }
 
     public Command goToStow() {
-        intake.goToStow();
+        pivot.goToStow();
         return this;
     }
 

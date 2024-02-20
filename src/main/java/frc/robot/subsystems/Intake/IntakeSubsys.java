@@ -31,6 +31,10 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
     /*============================
               Indexer
     ==============================*/
+    public void setIndexerSpeed(IndexerSpeed speed) {
+      indexerSpeed = speed;
+      // TODO: set speed
+    }
 
     public void intake() {
     indexerSpeed = IndexerSpeed.INTAKE;
@@ -65,6 +69,10 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
     /*============================
               Pivot
     ==============================*/
+    public void setPivotState(PivotState state) {
+      pivotState = state;
+      // TODO: set motor to new state
+    }
 
     public void intakePivot(double position) {
 
@@ -111,7 +119,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
     }
 
     public void goToAmp() {
-      pivotState = PivotState.SOURCE;
+      pivotState = PivotState.AMP;
     }
 
     public void goToStow() {

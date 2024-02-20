@@ -1,34 +1,28 @@
 package frc.robot;
 
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
-import frc.robot.subsystems.SwerveSubsys;
+import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 
 public class RobotContainer {
     /* Controllers */
-    private final Joystick driver = new Joystick(0);
+    // private final Joystick driver = new Joystick(0);
     public final Joystick operator = new Joystick(1); 
 
-    /* Drive Controls */
-    private final int translationAxis = XboxController.Axis.kLeftY.value;
-    private final int strafeAxis = XboxController.Axis.kLeftX.value;
-    private final int rotationAxis = XboxController.Axis.kRightX.value;
+    // /* Drive Controls */
+    // private final int translationAxis = XboxController.Axis.kLeftY.value;
+    // private final int strafeAxis = XboxController.Axis.kLeftX.value;
+    // private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
     // private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
@@ -78,14 +72,14 @@ public class RobotContainer {
         new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
 
         //Temporary Intake Buttons
-        new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, () -> s_intake.feedShooter()));
-        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToGround()));
+        new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
+        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.GROUND));
 
-        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToSource()));
-        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToAmp()));
-        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, () -> s_intake.goToStow()));
-        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, () -> s_intake.intake()));
-        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, () -> s_intake.eject()));
+        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.SOURCE));
+        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP));
+        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.STOW));
+        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
+        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.EJECT));
 
     }
 

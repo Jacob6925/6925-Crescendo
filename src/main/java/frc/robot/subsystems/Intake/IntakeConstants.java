@@ -26,7 +26,6 @@ public class IntakeConstants {
         AMP(k_ampSpeed);
      
         public final double speed;
-
         IndexerSpeed(double speed) {
           this.speed = speed;
         }

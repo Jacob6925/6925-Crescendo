@@ -33,73 +33,31 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
     ==============================*/
     public void setIndexerSpeed(IndexerSpeed speed) {
       indexerSpeed = speed;
-      // TODO: set speed
-    }
-
-    public void intake() {
-    indexerSpeed = IndexerSpeed.INTAKE;
-    indexerMotor.set(indexerSpeed.speed);
-    }
-
-    public void eject() {
-    indexerSpeed = IndexerSpeed.EJECT;
-    indexerMotor.set(indexerSpeed.speed);
-    }
-
-    public void pulse() {
-    indexerSpeed = IndexerSpeed.PULSE;
-    indexerMotor.set(indexerSpeed.speed);
-    }
-
-    public void feedShooter() {
-    indexerSpeed = IndexerSpeed.FEED_SHOOTER;
-    indexerMotor.set(indexerSpeed.speed);
-    }
-
-    public void amp() {
-    indexerSpeed = IndexerSpeed.AMP;
-    indexerMotor.set(indexerSpeed.speed);
-    }
-
-    public void stopIntake() {
-    indexerSpeed = IndexerSpeed.NONE;
-    indexerMotor.set(indexerSpeed.speed);
+      indexerMotor.set(indexerSpeed.speed);
     }
     
     /*============================
               Pivot
     ==============================*/
-    public void setPivotState(PivotState state) {
-      pivotState = state;
-      // TODO: set motor to new state
-    }
-
+    // what is position (maybe radians?)
     public void intakePivot(double position) {
-
       intakePivotPosition.Position = position;
       pivotMotor.setControl(intakePivotPosition);
-
     }
 
     public void intakePivotPercentOutput(double percentOutput) {
-
       intakePivotPercentOutput.Output = percentOutput;
       pivotMotor.setControl(intakePivotPercentOutput);
-
     }
 
     public void resetIntakePivot() {
-
       pivotMotor.setPosition(0);
-
     }
 
     public void configIntakePivotMotor() {
-
       pivotMotor.getConfigurator().apply(new TalonFXConfiguration());
       pivotMotor.getConfigurator().apply(Robot.ctreConfigs.intakePivotFXConfig);
       resetIntakePivot();
-
     }
 
     public double getIntakePivotPosition() {
@@ -108,22 +66,6 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
     public double getIntakePivotRotorPosition() {
       return pivotMotor.getRotorPosition().getValueAsDouble();
-    }
-
-    public void goToGround() {
-      pivotState = PivotState.GROUND;
-    }
-
-    public void goToSource() {
-      pivotState = PivotState.SOURCE;
-    }
-
-    public void goToAmp() {
-      pivotState = PivotState.AMP;
-    }
-
-    public void goToStow() {
-      pivotState = PivotState.STOW;
     }
 
   @Override
@@ -140,7 +82,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
       SmartDashboard.putString("Intake State", indexerSpeed.toString());
       SmartDashboard.putNumber("Intake Pivot Position", getIntakePivotPosition());
       SmartDashboard.putNumber("Intake Pivot Rotor Position", getIntakePivotRotorPosition());
-      SmartDashboard.putBoolean("Limit Switch", intakeHasNote());
+      SmartDashboard.putBoolean("Note in intake", intakeHasNote());
 
     }
     if (pivotState == PivotState.GROUND && intakeHasNote()) {

@@ -28,19 +28,19 @@ public class IntakeCommand extends Command {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        if (state != null) intake.setPivotState(state);
-        if (speed != null) intake.setIndexerSpeed(speed);
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
-    public void execute() {}
+    public void execute() {
+        if (state != null) intake.intakePivot(state.pivotSetpoint);
+        if (speed != null) intake.setIndexerSpeed(speed);
+    }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        intake.stopIntake();
+        intake.setIndexerSpeed(IndexerSpeed.NONE);
     }
 
     // Returns true when the command should end.

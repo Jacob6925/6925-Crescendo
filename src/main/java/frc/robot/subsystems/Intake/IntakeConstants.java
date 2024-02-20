@@ -9,11 +9,11 @@ public class IntakeConstants {
             Indexer Constants
     ==============================*/
 
-    public static final double k_intakeSpeed = 0.3;
-    public static final double k_ejectSpeed = -0.1;
-    public static final double k_feedShooterSpeed = -0.5;
-    public static final double k_pulseSpeed = 0.1;
-    public static final double k_ampSpeed = 0.2;
+    public static final double k_intakeSpeed = -0.5;
+    public static final double k_ejectSpeed = 0.1;
+    public static final double k_feedShooterSpeed = 0.7;
+    public static final double k_pulseSpeed = -0.1;
+    public static final double k_ampSpeed = -0.2;
 
     public static final int indexerCurrentLimit = 30;
 

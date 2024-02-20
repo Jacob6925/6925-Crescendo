@@ -2,8 +2,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake.IntakeSubsys;
-import frc.robot.subsystems.Intake.IndexerSubsys;
 import frc.robot.subsystems.Intake.PivotSubsys;
+import frc.robot.subsystems.Intake.IndexerSubsys;
 
 public class IntakeCommand extends Command {
     private final IntakeSubsys intake;
@@ -16,7 +16,7 @@ public class IntakeCommand extends Command {
         this.indexer = indexer;
         this.runnable = runnable;
         this.pivot = pivot;
-
+        
         addRequirements(intake);
         addRequirements(indexer);
         addRequirements(pivot);

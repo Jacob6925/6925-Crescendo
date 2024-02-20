@@ -3,7 +3,38 @@ package frc.robot.subsystems.Intake;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
-public class PivotConstants {
+public class IntakeConstants {
+
+    /*============================
+            Indexer Constants
+    ==============================*/
+
+    public static final double k_intakeSpeed = 0.3;
+    public static final double k_ejectSpeed = -0.1;
+    public static final double k_feedShooterSpeed = -0.5;
+    public static final double k_pulseSpeed = 0.1;
+    public static final double k_ampSpeed = 0.2;
+
+    public static final int indexerCurrentLimit = 30;
+
+    public enum IndexerSpeed {
+        NONE(0.0),
+        INTAKE(k_intakeSpeed),
+        EJECT(k_ejectSpeed),
+        PULSE(k_pulseSpeed),
+        FEED_SHOOTER(k_feedShooterSpeed),
+        AMP(k_ampSpeed);
+     
+        public final double speed;
+
+        IndexerSpeed(double speed) {
+          this.speed = speed;
+        }
+    }
+
+    /*============================
+            Pivot Constants
+    ==============================*/
 
     /* Intake Inverts and Neutral Mode */
     public static final InvertedValue INTAKE_PIVOT_INVERTED = InvertedValue.CounterClockwise_Positive;
@@ -31,4 +62,20 @@ public class PivotConstants {
     public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;
     public static final double INTAKE_PIVOT_ACCELERATION = 140;
     //public static final double INTAKE_PIVOT_JERK = 100;
+
+    public enum PivotState {
+
+        NONE(Double.MAX_VALUE),
+        GROUND(INTAKE_PIVOT_GROUND),
+        SOURCE(INTAKE_PIVOT_SOURCE),
+        AMP(INTAKE_PIVOT_AMP),
+        STOW(INTAKE_PIVOT_STOW);
+
+        public double pivotSetpoint;
+        private PivotState(double pivot) {
+            pivotSetpoint = pivot;
+        }
+
+    }
+
 }

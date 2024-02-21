@@ -78,17 +78,15 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
       } else {
         indexerSpeed = IndexerSpeed.NONE;
       }
-
-      SmartDashboard.putString("Intake State", indexerSpeed.toString());
-      SmartDashboard.putNumber("Intake Pivot Position", getIntakePivotPosition());
-      SmartDashboard.putNumber("Intake Pivot Rotor Position", getIntakePivotRotorPosition());
-      SmartDashboard.putBoolean("Note in intake", intakeHasNote());
-
     }
     if (pivotState == PivotState.GROUND && intakeHasNote()) {
        indexerSpeed = IndexerSpeed.PULSE;
        pivotState = PivotState.STOW; 
     }
+    SmartDashboard.putString("Intake State", indexerSpeed.toString());
+    SmartDashboard.putNumber("Intake Pivot Position", getIntakePivotPosition());
+    SmartDashboard.putNumber("Intake Pivot Rotor Position", getIntakePivotRotorPosition());
+    SmartDashboard.putBoolean("Note in intake", intakeHasNote());
   }
 
     public boolean intakeHasNote() {

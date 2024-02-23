@@ -16,7 +16,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
  public class IntakeSubsys extends SubsystemBase {
 
   //Device ID
-  private static final DigitalInput intakeLimitSwitch = new DigitalInput(0);
+  private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
   private static final TalonFX indexerMotor =  new TalonFX(14);
   private static final TalonFX pivotMotor = new TalonFX(15);
 

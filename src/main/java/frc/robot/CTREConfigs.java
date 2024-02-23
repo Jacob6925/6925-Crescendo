@@ -84,11 +84,11 @@ public final class CTREConfigs {
         intakePivotSlot0.kV = IntakeConstants.INTAKE_PIVOT_V;
         
         /* Intake Pivot Feedback Config */
-        /*var intakePivotFeedback = intakePivotFXConfig.Feedback;
-        intakePivotFeedback.FeedbackRemoteSensorID = Constants.INTAKE_CANCODER_ID;
-        intakePivotFeedback.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
-        intakePivotFeedback.SensorToMechanismRatio = 1;
-        intakePivotFeedback.RotorToSensorRatio = 25; */
+        var intakePivotFeedback = intakePivotFXConfig.Feedback;
+        // intakePivotFeedback.FeedbackRemoteSensorID = Constants.INTAKE_CANCODER_ID;
+        // intakePivotFeedback.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
+        // intakePivotFeedback.SensorToMechanismRatio = 1;
+        // intakePivotFeedback.RotorToSensorRatio = 25; 
         
         var intakePivotMotionMagic = intakePivotFXConfig.MotionMagic;
         intakePivotMotionMagic.MotionMagicCruiseVelocity = IntakeConstants.INTAKE_PIVOT_CRUISE_VELOCITY;

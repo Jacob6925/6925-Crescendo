@@ -50,14 +50,14 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
       pivotMotor.setControl(intakePivotPercentOutput);
     }
 
-    public void resetIntakePivot() {
-      pivotMotor.setPosition(0);
-    }
+    // public void resetIntakePivot() {
+    //   pivotMotor.setPosition(0);
+    // }
 
     public void configIntakePivotMotor() {
       pivotMotor.getConfigurator().apply(new TalonFXConfiguration());
       pivotMotor.getConfigurator().apply(Robot.ctreConfigs.intakePivotFXConfig);
-      resetIntakePivot();
+      //resetIntakePivot();
     }
 
     public double getIntakePivotPosition() {
@@ -66,6 +66,11 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
     public double getIntakePivotRotorPosition() {
       return pivotMotor.getRotorPosition().getValueAsDouble();
+    }
+
+    public double getTestPosition() {
+      double motorRotations = pivotMotor.getPosition().getValueAsDouble();
+      return motorRotations;
     }
 
   @Override
@@ -86,6 +91,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
     SmartDashboard.putString("Intake State", indexerSpeed.toString());
     SmartDashboard.putNumber("Intake Pivot Position", getIntakePivotPosition());
     SmartDashboard.putNumber("Intake Pivot Rotor Position", getIntakePivotRotorPosition());
+    SmartDashboard.putNumber("test", getTestPosition());
     SmartDashboard.putBoolean("Note in intake", intakeHasNote());
   }
 

@@ -46,7 +46,7 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_SUPPLY_TIME_THRESHOLD = 0.1;
 
     /* Intake Pivot PID Constants */
-    public static final double INTAKE_PIVOT_P = 0.1; //0.1
+    public static final double INTAKE_PIVOT_P = 10; //0.1
     public static final double INTAKE_PIVOT_I = 0;
     public static final double INTAKE_PIVOT_D = 0;
     public static final double INTAKE_PIVOT_V = 0; //0.01
@@ -55,7 +55,7 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_GROUND = 1000; //TODO: Change these values
     public static final double INTAKE_PIVOT_SOURCE = 1000;
     public static final double INTAKE_PIVOT_AMP = 1000;
-    public static final double INTAKE_PIVOT_STOW = 1000;
+    public static final double INTAKE_PIVOT_STOW = 0;
     
     /* Intake Pivot Motion Magic */
     public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;

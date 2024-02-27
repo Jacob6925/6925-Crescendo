@@ -74,17 +74,17 @@ public class RobotContainer {
         
         //Temporary Shooter Buttons
         new JoystickButton(operator, 1).whileTrue(new ShooterCommand(s_Shooter, -0.65));
-        new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
+       // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
 
         //Temporary Intake Buttons
         new JoystickButton(operator, 2).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
         new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.GROUND));
 
-        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.SOURCE));
-        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP));
+        // new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.SOURCE));
+        // new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP));
         new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.STOW));
-        new JoystickButton(operator, 10).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.EJECT));
+        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
+        //new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.EJECT));
 
     }
 

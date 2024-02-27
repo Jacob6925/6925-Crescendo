@@ -9,11 +9,11 @@ public class IntakeConstants {
             Indexer Constants
     ==============================*/
 
-    public static final double k_intakeSpeed = -0.5;
-    public static final double k_ejectSpeed = 0.1;
-    public static final double k_feedShooterSpeed = 0.7;
-    public static final double k_pulseSpeed = -0.1;
-    public static final double k_ampSpeed = -0.2;
+    public static final double k_intakeSpeed = 0.075;
+    public static final double k_ejectSpeed = -0.1;
+    public static final double k_feedShooterSpeed = -0.35;
+    public static final double k_pulseSpeed = 0.01;
+    public static final double k_ampSpeed = 0;
 
     public static final int indexerCurrentLimit = 30;
 
@@ -46,20 +46,20 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_SUPPLY_TIME_THRESHOLD = 0.1;
 
     /* Intake Pivot PID Constants */
-    public static final double INTAKE_PIVOT_P = 10; //0.1
+    public static final double INTAKE_PIVOT_P = 0.1; //0.1
     public static final double INTAKE_PIVOT_I = 0;
     public static final double INTAKE_PIVOT_D = 0;
-    public static final double INTAKE_PIVOT_V = 0; //0.01
+    public static final double INTAKE_PIVOT_V = 0.1; //0.01
 
     /* Intake Pivot Setpoints */
-    public static final double INTAKE_PIVOT_GROUND = 1000; //TODO: Change these values
-    public static final double INTAKE_PIVOT_SOURCE = 1000;
-    public static final double INTAKE_PIVOT_AMP = 1000;
-    public static final double INTAKE_PIVOT_STOW = 0;
+    public static final double INTAKE_PIVOT_GROUND = -43.79248046875; //TODO: Change these values
+    public static final double INTAKE_PIVOT_SOURCE = 0;
+    public static final double INTAKE_PIVOT_AMP = 0;
+    public static final double INTAKE_PIVOT_STOW = -4.4;
     
     /* Intake Pivot Motion Magic */
-    public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;
-    public static final double INTAKE_PIVOT_ACCELERATION = 140;
+    public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 80;  //95
+    public static final double INTAKE_PIVOT_ACCELERATION = 60;//140
     //public static final double INTAKE_PIVOT_JERK = 100;
 
     public enum PivotState {

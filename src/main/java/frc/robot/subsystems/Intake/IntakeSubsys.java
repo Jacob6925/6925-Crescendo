@@ -16,9 +16,9 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
  public class IntakeSubsys extends SubsystemBase {
 
   //Device ID
-  private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
+  //private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
   private static final TalonFX indexerMotor =  new TalonFX(14);
-  private static final TalonFX pivotMotor = new TalonFX(15);
+  private TalonFX pivotMotor;
 
   //States
   private static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
@@ -26,6 +26,11 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
   private PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
   private DutyCycleOut intakePivotPercentOutput = new DutyCycleOut(0);
+
+  public IntakeSubsys() {
+    pivotMotor = new TalonFX(15);
+    configIntakePivotMotor();
+  }
   
 
     /*============================
@@ -68,27 +73,27 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
   @Override
   public void periodic() {
-    if (indexerSpeed == IndexerSpeed.PULSE) {
-      // Use the timer to pulse the intake on for a 1/16 second,
-      // then off for a 15/16 second
-      if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
-        indexerSpeed = IndexerSpeed.PULSE;
-      } else {
-        indexerSpeed = IndexerSpeed.NONE;
-      }
-    }
-    if (pivotState == PivotState.GROUND && intakeHasNote()) {
-       indexerSpeed = IndexerSpeed.PULSE;
-       pivotState = PivotState.STOW; 
-    }
+    // if (indexerSpeed == IndexerSpeed.PULSE) {
+    //   // Use the timer to pulse the intake on for a 1/16 second,
+    //   // then off for a 15/16 second
+    //   if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
+    //     indexerSpeed = IndexerSpeed.PULSE;
+    //   } else {
+    //     indexerSpeed = IndexerSpeed.NONE;
+    //   }
+    // }
+    // if (pivotState == PivotState.GROUND && intakeHasNote()) {
+    //    indexerSpeed = IndexerSpeed.PULSE;
+    //    pivotState = PivotState.STOW; 
+    // }
     SmartDashboard.putString("Intake State", indexerSpeed.toString());
     SmartDashboard.putNumber("Pivot Position", getIntakePivotRotorPosition());
-    SmartDashboard.putBoolean("Note in intake", intakeHasNote());
+    //SmartDashboard.putBoolean("Note in intake", intakeHasNote());
   }
 
-    public boolean intakeHasNote() {
-     // NOTE: this is intentionally inverted, because the limit switch is normally closed
-     return !intakeLimitSwitch.get();
-    }
+    // public boolean intakeHasNote() {
+    //  // NOTE: this is intentionally inverted, because the limit switch is normally closed
+    //  return !intakeLimitSwitch.get();
+    // }
 
 }

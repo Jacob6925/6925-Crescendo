@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubsys extends SubsystemBase {
 
-    private final TalonFX climberRight = new TalonFX(20);
-    private final TalonFX climberLeft = new TalonFX(21);
+    private final TalonFX climberRight = new TalonFX(16);
+    private final TalonFX climberLeft = new TalonFX(17);
 
     public ClimberSubsys(){
 

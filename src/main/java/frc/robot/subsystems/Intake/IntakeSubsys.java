@@ -6,6 +6,7 @@ import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
@@ -71,23 +72,23 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
   @Override
   public void periodic() {
-    // if (indexerSpeed == IndexerSpeed.PULSE) {
-    //   // Use the timer to pulse the intake on for a 1/16 second,
-    //   // then off for a 15/16 second
-    //   if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
-    //     indexerSpeed = IndexerSpeed.PULSE;
-    //   } else {
-    //     indexerSpeed = IndexerSpeed.NONE;
-    //   }
-    // }
+    if (indexerSpeed == IndexerSpeed.PULSE) {
+      // Use the timer to pulse the intake on for a 1/16 second,
+      // then off for a 15/16 second
+      if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
+        indexerSpeed = IndexerSpeed.PULSE;
+      } else {
+        indexerSpeed = IndexerSpeed.NONE;
+      }
+    }
     if (intakeHasNote() && indexerMotor.get() > 0) {
       setIndexerSpeed(IndexerSpeed.NONE);
-      //  indexerSpeed = IndexerSpeed.PULSE;
-      //  pivotState = PivotState.STOW; 
+       indexerSpeed = IndexerSpeed.PULSE;
+       pivotState = PivotState.STOW; 
     }
     SmartDashboard.putString("Intake State", indexerSpeed.toString());
     SmartDashboard.putNumber("Pivot Position", getIntakePivotRotorPosition());
-    //SmartDashboard.putBoolean("Note in intake", intakeHasNote());
+    SmartDashboard.putBoolean("Note in intake", intakeHasNote());
   }
 
     public boolean intakeHasNote() {

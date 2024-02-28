@@ -60,7 +60,7 @@ public class IntakeConstants {
     /* Intake Pivot Motion Magic */
     public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 80;
     public static final double INTAKE_PIVOT_ACCELERATION = 50;
-    //public static final double INTAKE_PIVOT_JERK = 100;
+    public static final double INTAKE_PIVOT_JERK = 1000;
 
     public enum PivotState {
 

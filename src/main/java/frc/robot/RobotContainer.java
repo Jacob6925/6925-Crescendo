@@ -78,7 +78,7 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        new JoystickButton(operator, 1).whileTrue(new TeleopShooter(s_Shooter, -0.75));
+        new JoystickButton(operator, 1).whileTrue(new TeleopShooter(s_Shooter, -0.75, -0.75));
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons

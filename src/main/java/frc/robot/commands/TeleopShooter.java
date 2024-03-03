@@ -5,11 +5,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class TeleopShooter extends Command{
     private ShooterSubsys shooter;
-    private double speed;
+    private double top;
+    private double bottom;
 
-    public TeleopShooter(ShooterSubsys s_shooter, double speed){
+    public TeleopShooter(ShooterSubsys s_shooter, double top, double bottom){
         shooter = s_shooter;
-        this.speed = speed;
+        this.top = top;
+        this.bottom = bottom;
         addRequirements(shooter);
     }
 
@@ -19,7 +21,7 @@ public class TeleopShooter extends Command{
 
     @Override
     public void execute(){
-        if (speed != 0) shooter.setMotor(speed);
+        if (top != 0 && bottom !=0) shooter.setMotor(top,bottom);
     }
 
     @Override

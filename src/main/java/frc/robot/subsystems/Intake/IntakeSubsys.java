@@ -81,7 +81,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
         indexerSpeed = IndexerSpeed.NONE;
       }
     }
-    if (intakeHasNote()) {
+    if (intakeHasNote() && indexerMotor.get() > 0) {
       setIndexerSpeed(IndexerSpeed.NONE);
        indexerSpeed = IndexerSpeed.PULSE;
        pivotState = PivotState.STOW; 
@@ -97,5 +97,3 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
     }
 
 }
-
-//&& indexerMotor.get() > 0

@@ -9,10 +9,10 @@ public class IntakeConstants {
             Indexer Constants
     ==============================*/
 
-    public static final double k_intakeSpeed = 0.15;
+    public static final double k_intakeSpeed = 0.4;
     public static final double k_ejectSpeed = -0.1;
-    public static final double k_feedShooterSpeed = -0.45;
-    public static final double k_pulseSpeed = 0.01;
+    public static final double k_feedShooterSpeed = -0.7;
+    public static final double k_pulseSpeed = 0.1;
     public static final double k_ampSpeed = 0;
 
     public static final int indexerCurrentLimit = 30;
@@ -52,14 +52,14 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_V = 0.1; //0.01
 
     /* Intake Pivot Setpoints */
-    public static final double INTAKE_PIVOT_GROUND = -43.79248046875; //TODO: Change these values
+    public static final double INTAKE_PIVOT_GROUND = -40.05957; //TODO: Change these values
     public static final double INTAKE_PIVOT_SOURCE = 0;
     public static final double INTAKE_PIVOT_AMP = 0;
-    public static final double INTAKE_PIVOT_STOW = -4.0;
+    public static final double INTAKE_PIVOT_STOW = -1.0;
     
     /* Intake Pivot Motion Magic */
-    public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 80;
-    public static final double INTAKE_PIVOT_ACCELERATION = 50;
+    public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;
+    public static final double INTAKE_PIVOT_ACCELERATION = 140;
     //public static final double INTAKE_PIVOT_JERK = 100;
 
     public enum PivotState {

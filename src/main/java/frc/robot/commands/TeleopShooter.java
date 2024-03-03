@@ -3,11 +3,11 @@ package frc.robot.commands;
 import frc.robot.subsystems.ShooterSubsys;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class ShooterCommand extends Command{
+public class TeleopShooter extends Command{
     private ShooterSubsys shooter;
     private double speed;
 
-    public ShooterCommand(ShooterSubsys s_shooter, double speed){
+    public TeleopShooter(ShooterSubsys s_shooter, double speed){
         shooter = s_shooter;
         this.speed = speed;
         addRequirements(shooter);

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.SpinUpShooter;
 import frc.robot.commands.TeleopClimber;
 import frc.robot.commands.TeleopIntake;
 import frc.robot.commands.TeleopShooter;
@@ -22,11 +21,13 @@ import frc.robot.subsystems.SwerveSubsys;
 import frc. robot.subsystems.ClimberSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
+import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
+import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
-    public final Joystick operator = new Joystick(1); 
+    private final Joystick operator = new Joystick(1); 
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -54,11 +55,33 @@ public class RobotContainer {
         configureButtonBindings();
         
         //Pathplanner commands - templates
-        NamedCommands.registerCommand("Spin Up Shooter", new SpinUpShooter(s_Shooter));
+        // NamedCommands.registerCommand("Spin Up Shooter", new SpinUpShooter(s_Shooter));
 
         NamedCommands.registerCommand("testTwo", Commands.print("Passed marker 2"));
         NamedCommands.registerCommand("print hello", Commands.print("hello"));
          
+        // Register PathPlanner named commands
+        NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75), s_Shooter));
+        NamedCommands.registerCommand("Ground Intake", new TeleopIntake(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
+        NamedCommands.registerCommand("Stow Intake", new TeleopIntake(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
+        NamedCommands.registerCommand("Score Gamepiece", new TeleopIntake(s_intake, IndexerSpeed.INTAKE));
+        /*
+         * SpinUpShooter
+         *    have the shooter running through the 15 seconds
+         * 
+         * GroundIntake
+         *    PivotState.GROUND
+         *    IndexerSpeed.INTAKE
+         * 
+         * StowIntake
+         *    PivotState.STOW
+         *    IndexerSpeed.PULSE
+         * 
+         * ScoreGamepiece
+         *    IndexerSpeed.INTAKE
+         *    Feeds the game piece to the shooter by spinning indexer
+         */
+
         //Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -78,11 +101,11 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        new JoystickButton(operator, 1).whileTrue(new TeleopShooter(s_Shooter, -0.85, -0.85));
+        new JoystickButton(operator, 2).whileTrue(new TeleopShooter(s_Shooter, -0.85, -0.85));
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons
-        new JoystickButton(operator, 2).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
+        new JoystickButton(operator, 1).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
         new JoystickButton(operator, 6).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
 
         //Temporary Pivot Buttons

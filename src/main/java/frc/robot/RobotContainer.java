@@ -78,7 +78,7 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        new JoystickButton(operator, 1).whileTrue(new TeleopShooter(s_Shooter, -0.75, -0.75));
+        new JoystickButton(operator, 1).whileTrue(new TeleopShooter(s_Shooter, -0.85, -0.85));
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons
@@ -86,7 +86,7 @@ public class RobotContainer {
         new JoystickButton(operator, 6).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
 
         //Temporary Pivot Buttons
-        new JoystickButton(operator, 5).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.GROUND));
+        new JoystickButton(operator, 5).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.GROUND, IntakeConstants.IndexerSpeed.INTAKE));
         new JoystickButton(operator, 3).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.STOW));
       
         //Temporary Climber Buttons

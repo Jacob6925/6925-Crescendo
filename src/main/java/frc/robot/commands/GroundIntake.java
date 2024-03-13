@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-// import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj2.command.Command;
-// import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
+import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
+import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 
 public class GroundIntake extends Command{
@@ -19,6 +19,9 @@ public class GroundIntake extends Command{
 
     @Override 
     public void initialize() {
+        new TeleopIntake(m_intake, PivotState.GROUND, IndexerSpeed.INTAKE);
+        m_intake.intakePivot(PivotState.GROUND.pivotSetpoint);
+        m_intake.setIndexerSpeed(IndexerSpeed.INTAKE);
 
         // m_intake.setIndexerSpeed(0.15);
         // m_intake.intakePivot(m_intake, IntakeConstants.PivotState.GROUND);

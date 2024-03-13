@@ -16,7 +16,7 @@ public class SpinUpShooter extends Command{
 
     @Override 
     public void initialize() {
-        m_shooter.setMotor(-0.75,-0.75);
+        m_shooter.setMotor(-0.85,-0.85);
     }
 
     @Override

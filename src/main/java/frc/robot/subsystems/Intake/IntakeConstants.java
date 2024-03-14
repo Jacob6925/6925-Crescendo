@@ -9,21 +9,22 @@ public class IntakeConstants {
             Indexer Constants
     ==============================*/
 
-    public static final double k_intakeSpeed = 0.4;
-    public static final double k_ejectSpeed = -0.1;
-    public static final double k_feedShooterSpeed = -0.7;
-    public static final double k_pulseSpeed = 0.1;
-    public static final double k_ampSpeed = 0;
+    public static final double INDEXER_INTAKE_SPEED = 0.4;
+    public static final double INDEXER_EJECT_SPEED = -0.1;
+    public static final double INDEXER_FEED_SHOOTER_SPEED = -0.7;
+    public static final double INDEXER_PULSE_SPEED = 0.1;
+    public static final double INDEXER_AMP_SPEED = 0;
 
-    public static final int indexerCurrentLimit = 30;
+    // value not used in code
+    // public static final int indexerCurrentLimit = 30; 
 
     public enum IndexerSpeed {
         NONE(0.0),
-        INTAKE(k_intakeSpeed),
-        EJECT(k_ejectSpeed),
-        PULSE(k_pulseSpeed),
-        FEED_SHOOTER(k_feedShooterSpeed),
-        AMP(k_ampSpeed);
+        INTAKE(INDEXER_INTAKE_SPEED),
+        EJECT(INDEXER_EJECT_SPEED),
+        PULSE(INDEXER_PULSE_SPEED),
+        FEED_SHOOTER(INDEXER_FEED_SHOOTER_SPEED),
+        AMP(INDEXER_AMP_SPEED);
      
         public final double speed;
         IndexerSpeed(double speed) {
@@ -60,10 +61,8 @@ public class IntakeConstants {
     /* Intake Pivot Motion Magic */
     public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;
     public static final double INTAKE_PIVOT_ACCELERATION = 140;
-    //public static final double INTAKE_PIVOT_JERK = 100;
 
     public enum PivotState {
-
         NONE(Double.MAX_VALUE),
         GROUND(INTAKE_PIVOT_GROUND),
         SOURCE(INTAKE_PIVOT_SOURCE),
@@ -74,7 +73,5 @@ public class IntakeConstants {
         private PivotState(double pivot) {
             pivotSetpoint = pivot;
         }
-
     }
-
 }

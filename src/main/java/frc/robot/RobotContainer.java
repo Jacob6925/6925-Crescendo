@@ -3,6 +3,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -42,7 +43,7 @@ public class RobotContainer {
     private final SwerveSubsys s_Swerve = new SwerveSubsys();
     private final ShooterSubsys s_Shooter = new ShooterSubsys();
     private final IntakeSubsys s_intake = new IntakeSubsys();
-    private final ClimberSubsys s_climber = new ClimberSubsys();
+    // private final ClimberSubsys s_climber = new ClimberSubsys();
 
      /* AutoChooser */
     private final SendableChooser<Command> autoChooser;
@@ -65,26 +66,13 @@ public class RobotContainer {
         NamedCommands.registerCommand("Ground Intake", new TeleopIntake(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
         NamedCommands.registerCommand("Stow Intake", new TeleopIntake(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
         NamedCommands.registerCommand("Score Gamepiece", new TeleopIntake(s_intake, IndexerSpeed.INTAKE));
-        /*
-         * SpinUpShooter
-         *    have the shooter running through the 15 seconds
-         * 
-         * GroundIntake
-         *    PivotState.GROUND
-         *    IndexerSpeed.INTAKE
-         * 
-         * StowIntake
-         *    PivotState.STOW
-         *    IndexerSpeed.PULSE
-         * 
-         * ScoreGamepiece
-         *    IndexerSpeed.INTAKE
-         *    Feeds the game piece to the shooter by spinning indexer
-         */
 
         //Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
         SmartDashboard.putData("Auto Mode", autoChooser);
+
+        // Setup camera
+        CameraServer.startAutomaticCapture();
     }
 
     private void configureButtonBindings() {
@@ -102,6 +90,7 @@ public class RobotContainer {
         
         //Temporary Shooter Buttons
         new JoystickButton(operator, 2).whileTrue(new TeleopShooter(s_Shooter, -0.85, -0.85));
+        new JoystickButton(operator, 11).whileTrue(new TeleopShooter(s_Shooter, -0.5, -0.5));
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons
@@ -113,13 +102,10 @@ public class RobotContainer {
         new JoystickButton(operator, 3).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.STOW));
       
         //Temporary Climber Buttons
-        new JoystickButton(operator, 7).whileTrue(new TeleopClimber(s_climber, 0.3));
-        new JoystickButton(operator, 8).whileTrue(new TeleopClimber(s_climber, -0.3));
-
-
-        // new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.SOURCE));
-        // new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP));
-        //new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.EJECT));
+        // new JoystickButton(operator, 7).whileTrue(new TeleopClimber(s_climber, 0.3, 0));
+        // new JoystickButton(operator, 8).whileTrue(new TeleopClimber(s_climber, 0, 0.3));
+        // new JoystickButton(operator, 9).whileTrue(new TeleopClimber(s_climber, -0.3, 0));
+        // new JoystickButton(operator, 10).whileTrue(new TeleopClimber(s_climber, 0, -0.3));
 
     }
 

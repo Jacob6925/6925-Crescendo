@@ -1,0 +1,4 @@
+- limit switch
+  - when limit switch is detected: IntakeSpeed.NONE, PivotState.STOW
+- camera
+- set IntakeConstants.INTAKE_PIVOT_SOURCE and IntakeConstants.INTAKE_PIVOT_AMP vars to respective values

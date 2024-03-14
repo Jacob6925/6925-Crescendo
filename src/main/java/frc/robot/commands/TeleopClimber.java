@@ -5,21 +5,23 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class TeleopClimber extends Command{
     private ClimberSubsys climber;
-    private double speed;
+    private double leftSpeed;
+    private double rightSpeed;
 
-    public TeleopClimber(ClimberSubsys c_climber, double speed){
+    public TeleopClimber(ClimberSubsys c_climber, double leftSpeed, double rightSpeed){
         climber = c_climber;
-        this.speed = speed;
+        this.leftSpeed = leftSpeed;
+        this.rightSpeed = rightSpeed;
         addRequirements(climber);
     }
 
     @Override
-    public void initialize(){
-    }
+    public void initialize(){}
 
     @Override
     public void execute(){
-        climber.setMotor(speed);
+        climber.setLeft(leftSpeed);
+        climber.setRight(rightSpeed);
     }
 
     @Override

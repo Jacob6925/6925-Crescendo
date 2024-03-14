@@ -18,7 +18,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
   //Device ID
   private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
   private final TalonFX indexerMotor =  new TalonFX(14);
-  private final TalonFX pivotMotor = new TalonFX(15);;
+  private final TalonFX pivotMotor = new TalonFX(15);
 
   //States
   private static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;

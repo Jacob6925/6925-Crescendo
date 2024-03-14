@@ -12,9 +12,45 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Spin Up Shooter"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Score Gamepiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Ground Intake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "M-P2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stow Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Score Gamepiece"
           }
         },
         {

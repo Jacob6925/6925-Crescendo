@@ -46,10 +46,10 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_SUPPLY_TIME_THRESHOLD = 0.1;
 
     /* Intake Pivot PID Constants */
-    public static final double INTAKE_PIVOT_P = 0.1; //0.1
+    public static final double INTAKE_PIVOT_P = 0.1;
     public static final double INTAKE_PIVOT_I = 0;
     public static final double INTAKE_PIVOT_D = 0;
-    public static final double INTAKE_PIVOT_V = 0.1; //0.01
+    public static final double INTAKE_PIVOT_V = 0.1;
 
     /* Intake Pivot Setpoints */
     public static final double INTAKE_PIVOT_GROUND = -40.05957; //TODO: Change these values

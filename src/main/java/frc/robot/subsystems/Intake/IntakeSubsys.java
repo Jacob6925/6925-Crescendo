@@ -93,7 +93,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
     public boolean intakeHasNote() {
      // NOTE: this is intentionally inverted, because the limit switch is normally closed
-     return intakeLimitSwitch.get();
+     return !intakeLimitSwitch.get(); //TODO: Test this
     }
 
 }

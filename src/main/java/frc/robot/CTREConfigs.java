@@ -1,16 +1,22 @@
 package frc.robot;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
 import frc.robot.subsystems.Intake.IntakeConstants;
 
 public final class CTREConfigs {
-    public TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();
-    public TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
-    public CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
-
-    public TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
+    public final TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();
+    public final TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
+    public final TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
+    public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
+    public final SoftwareLimitSwitchConfigs climberConfig = new SoftwareLimitSwitchConfigs();
 
     public CTREConfigs(){
         /** Swerve CANCoder Configuration */
@@ -65,34 +71,38 @@ public final class CTREConfigs {
         //Pivot Configs
         
         /* Intake Pivot Output and Neutral Mode */
-        var intakePivotOutput = intakePivotFXConfig.MotorOutput;
+        MotorOutputConfigs intakePivotOutput = intakePivotFXConfig.MotorOutput;
         intakePivotOutput.Inverted = IntakeConstants.INTAKE_PIVOT_INVERTED;
         intakePivotOutput.NeutralMode = IntakeConstants.INTAKE_PIVOT_NEUTRAL_MODE;
         
         /* Intake Pivot Current Limits */
-        var intakePivotCurrentLimits = intakePivotFXConfig.CurrentLimits;
+        CurrentLimitsConfigs intakePivotCurrentLimits = intakePivotFXConfig.CurrentLimits;
         intakePivotCurrentLimits.SupplyCurrentLimitEnable = IntakeConstants.INTAKE_PIVOT_ENABLE_CURRENT_LIMIT;
         intakePivotCurrentLimits.SupplyCurrentLimit = IntakeConstants.INTAKE_PIVOT_SUPPLY_CURRENT_LIMIT;
         intakePivotCurrentLimits.SupplyCurrentThreshold = IntakeConstants.INTAKE_PIVOT_SUPPLY_CURRENT_THRESHOLD;
         intakePivotCurrentLimits.SupplyTimeThreshold = IntakeConstants.INTAKE_PIVOT_SUPPLY_TIME_THRESHOLD;
         
         /* Intake Pivot PID Config */
-        var intakePivotSlot0 = intakePivotFXConfig.Slot0;
+        Slot0Configs intakePivotSlot0 = intakePivotFXConfig.Slot0;
         intakePivotSlot0.kP = IntakeConstants.INTAKE_PIVOT_P;
         intakePivotSlot0.kI = IntakeConstants.INTAKE_PIVOT_I;
         intakePivotSlot0.kD = IntakeConstants.INTAKE_PIVOT_D;
         intakePivotSlot0.kV = IntakeConstants.INTAKE_PIVOT_V;
         
         /* Intake Pivot Feedback Config */
-        // var intakePivotFeedback = intakePivotFXConfig.Feedback;
+        // FeedbackConfigs intakePivotFeedback = intakePivotFXConfig.Feedback;
         // intakePivotFeedback.FeedbackRemoteSensorID = Constants.INTAKE_CANCODER_ID;
         // intakePivotFeedback.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
         // intakePivotFeedback.SensorToMechanismRatio = 1;
         // intakePivotFeedback.RotorToSensorRatio = 25; 
         
-        var intakePivotMotionMagic = intakePivotFXConfig.MotionMagic;
+        MotionMagicConfigs intakePivotMotionMagic = intakePivotFXConfig.MotionMagic;
         intakePivotMotionMagic.MotionMagicCruiseVelocity = IntakeConstants.INTAKE_PIVOT_CRUISE_VELOCITY;
         intakePivotMotionMagic.MotionMagicAcceleration = IntakeConstants.INTAKE_PIVOT_ACCELERATION;
+
+        /* Climber Config */
+        climberConfig.ReverseSoftLimitEnable = true;
+        climberConfig.ReverseSoftLimitThreshold = 0;
         
     }
 }

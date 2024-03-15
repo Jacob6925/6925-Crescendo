@@ -13,7 +13,7 @@ public class IntakeConstants {
     public static final double INDEXER_EJECT_SPEED = -0.1;
     public static final double INDEXER_FEED_SHOOTER_SPEED = -0.7;
     public static final double INDEXER_PULSE_SPEED = 0.1;
-    public static final double INDEXER_AMP_SPEED = 0;
+    public static final double INDEXER_AMP_SPEED = -0.23;
 
     // value not used in code
     // public static final int indexerCurrentLimit = 30; 
@@ -55,7 +55,7 @@ public class IntakeConstants {
     /* Intake Pivot Setpoints */
     public static final double INTAKE_PIVOT_GROUND = -40.05957; //TODO: Change these values
     public static final double INTAKE_PIVOT_SOURCE = 0;
-    public static final double INTAKE_PIVOT_AMP = 0;
+    public static final double INTAKE_PIVOT_AMP = -17;
     public static final double INTAKE_PIVOT_STOW = -1.0;
     
     /* Intake Pivot Motion Magic */

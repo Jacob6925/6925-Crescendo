@@ -65,7 +65,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75), s_Shooter));
         NamedCommands.registerCommand("Ground Intake", new TeleopIntake(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
         NamedCommands.registerCommand("Stow Intake", new TeleopIntake(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
-        NamedCommands.registerCommand("Score Gamepiece", new TeleopIntake(s_intake, IndexerSpeed.INTAKE));
+        NamedCommands.registerCommand("Score Gamepiece", new TeleopIntake(s_intake, IndexerSpeed.FEED_SHOOTER));
 
         //Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
@@ -90,16 +90,18 @@ public class RobotContainer {
         
         //Temporary Shooter Buttons
         new JoystickButton(operator, 2).whileTrue(new TeleopShooter(s_Shooter, -0.85, -0.85));
-        new JoystickButton(operator, 11).whileTrue(new TeleopShooter(s_Shooter, -0.5, -0.5));
+        new JoystickButton(operator, 4).whileTrue(new TeleopShooter(s_Shooter, -0.5, -0.5));
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons
         new JoystickButton(operator, 1).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
         new JoystickButton(operator, 6).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
+        new JoystickButton(operator, 12).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.AMP));
 
         //Temporary Pivot Buttons
         new JoystickButton(operator, 5).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.GROUND, IntakeConstants.IndexerSpeed.INTAKE));
         new JoystickButton(operator, 3).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.STOW));
+        new JoystickButton(operator, 11).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.AMP));
       
         //Temporary Climber Buttons
         // new JoystickButton(operator, 7).whileTrue(new TeleopClimber(s_climber, 0.3, 0));

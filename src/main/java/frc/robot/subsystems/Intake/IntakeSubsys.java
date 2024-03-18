@@ -20,7 +20,7 @@ public class IntakeSubsys extends SubsystemBase {
     public final TalonFX pivotMotor = new TalonFX(15);
 
     //States
-    private static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
+    public static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
     public static PivotState pivotState = PivotState.NONE;
 
     // Motion Magic
@@ -86,6 +86,7 @@ public class IntakeSubsys extends SubsystemBase {
 
         if (intakeHasNote()) {
             setIndexerSpeed(IndexerSpeed.NONE);
+            intakePivot(PivotState.STOW.pivotSetpoint);
             /*
             if we want to do this, use the method above
             // indexerSpeed = IndexerSpeed.PULSE;

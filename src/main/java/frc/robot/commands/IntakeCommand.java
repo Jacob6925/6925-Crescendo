@@ -19,14 +19,6 @@ public class IntakeCommand extends Command {
         addRequirements(intake);
     }
 
-    public IntakeCommand(IntakeSubsys intake, PivotState state) {
-        this(intake, state, null);
-    }
-
-    public IntakeCommand(IntakeSubsys intake, IndexerSpeed speed) {
-        this(intake, null, speed);
-    }
-
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {}

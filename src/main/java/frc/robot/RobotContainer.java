@@ -65,7 +65,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75), s_Shooter));
         NamedCommands.registerCommand("Ground Intake", new IntakeCommand(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
         NamedCommands.registerCommand("Stow Intake", new IntakeCommand(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
-        NamedCommands.registerCommand("Score Gamepiece", new IntakeCommand(s_intake, IndexerSpeed.FEED_SHOOTER));
+        NamedCommands.registerCommand("Score Gamepiece", new IntakeCommand(s_intake, IntakeSubsys.pivotState, IndexerSpeed.FEED_SHOOTER));
 
 
         //Auto chooser
@@ -95,14 +95,14 @@ public class RobotContainer {
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons
-        new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
-        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.AMP));
+        new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_intake, IntakeSubsys.pivotState, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
+        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(s_intake, IntakeSubsys.pivotState, IntakeConstants.IndexerSpeed.INTAKE));
+        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_intake, IntakeSubsys.pivotState, IntakeConstants.IndexerSpeed.AMP));
 
         //Temporary Pivot Buttons
         new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.GROUND, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 3).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.STOW));
-        new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP));
+        new JoystickButton(operator, 3).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.STOW, IntakeSubsys.indexerSpeed));
+        new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP, IntakeSubsys.indexerSpeed));
       
         //Temporary Climber Buttons
         // new JoystickButton(operator, 7).whileTrue(new TeleopClimber(s_climber, 0.3, 0));

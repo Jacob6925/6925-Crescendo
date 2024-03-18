@@ -3,3 +3,4 @@
 - camera
 - set IntakeConstants.INTAKE_PIVOT_SOURCE and IntakeConstants.INTAKE_PIVOT_AMP vars to respective values
 - make sure that climber config work
+- write isFinished method for each command

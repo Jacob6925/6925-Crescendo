@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.autonomous.IntakeCommandAuto;
 import frc.robot.commands.autonomous.ShooterCommandAuto;
 import frc.robot.commands.teleop.IntakeCommand;
@@ -66,7 +67,13 @@ public class RobotContainer {
         NamedCommands.registerCommand("Spin Up Shooter", new ShooterCommandAuto(s_Shooter, -0.75,-0.75));
         NamedCommands.registerCommand("Ground Intake", new IntakeCommandAuto(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
         NamedCommands.registerCommand("Stow Intake", new IntakeCommandAuto(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
-        NamedCommands.registerCommand("Score Gamepiece", new IntakeCommandAuto(s_intake, PivotState.NONE, IndexerSpeed.FEED_SHOOTER));
+        NamedCommands.registerCommand("Score Gamepiece",
+            new SequentialCommandGroup(
+                new IntakeCommandAuto(s_intake, PivotState.NONE, IndexerSpeed.FEED_SHOOTER),
+                Commands.waitSeconds(0.5),
+                new IntakeCommandAuto(s_intake, PivotState.NONE, IndexerSpeed.NONE)
+            )
+        );
 
 
         //Auto chooser

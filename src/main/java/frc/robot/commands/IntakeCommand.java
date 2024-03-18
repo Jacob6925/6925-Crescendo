@@ -6,12 +6,12 @@ import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
 import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
-public class TeleopIntake extends Command {
+public class IntakeCommand extends Command {
     private final IntakeSubsys intake;
     private PivotState state;
     private IndexerSpeed speed;
 
-    public TeleopIntake(IntakeSubsys intake, PivotState state, IndexerSpeed speed) {
+    public IntakeCommand(IntakeSubsys intake, PivotState state, IndexerSpeed speed) {
         this.intake = intake;
         this.state = state;
         this.speed = speed;
@@ -19,11 +19,11 @@ public class TeleopIntake extends Command {
         addRequirements(intake);
     }
 
-    public TeleopIntake(IntakeSubsys intake, PivotState state) {
+    public IntakeCommand(IntakeSubsys intake, PivotState state) {
         this(intake, state, null);
     }
 
-    public TeleopIntake(IntakeSubsys intake, IndexerSpeed speed) {
+    public IntakeCommand(IntakeSubsys intake, IndexerSpeed speed) {
         this(intake, null, speed);
     }
 

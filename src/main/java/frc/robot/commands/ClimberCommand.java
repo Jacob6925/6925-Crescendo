@@ -3,12 +3,12 @@ package frc.robot.commands;
 import frc.robot.subsystems.ClimberSubsys;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class TeleopClimber extends Command{
+public class ClimberCommand extends Command{
     private ClimberSubsys climber;
     private double leftSpeed;
     private double rightSpeed;
 
-    public TeleopClimber(ClimberSubsys climber, double leftSpeed, double rightSpeed){
+    public ClimberCommand(ClimberSubsys climber, double leftSpeed, double rightSpeed){
         this.climber = climber;
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;

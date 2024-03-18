@@ -21,7 +21,7 @@ public class TeleopShooter extends Command{
 
     @Override
     public void execute(){
-        if (top != 0 && bottom !=0) shooter.setMotor(top,bottom);
+        if (top != 0 && bottom != 0) shooter.setMotor(top, bottom);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class TeleopShooter extends Command{
 
     @Override
     public boolean isFinished(){
-        return false;
+        return shooter.shooterMotorTop.get() >= top && shooter.shooterMotorBottom.get() >= bottom;
     }
 }

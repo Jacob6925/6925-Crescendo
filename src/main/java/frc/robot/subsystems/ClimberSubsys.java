@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
 public class ClimberSubsys extends SubsystemBase {
-    private final TalonFX climberRight = new TalonFX(16);
-    private final TalonFX climberLeft = new TalonFX(17);
+    public final TalonFX climberRight = new TalonFX(16);
+    public final TalonFX climberLeft = new TalonFX(17);
 
     public ClimberSubsys() {
         climberLeft.getConfigurator().apply(Robot.ctreConfigs.climberConfig);

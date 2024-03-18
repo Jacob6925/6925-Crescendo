@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -7,8 +8,8 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 public class TeleopIntake extends Command {
     private final IntakeSubsys intake;
-    PivotState state;
-    IndexerSpeed speed;
+    private PivotState state;
+    private IndexerSpeed speed;
 
     public TeleopIntake(IntakeSubsys intake, PivotState state, IndexerSpeed speed) {
         this.intake = intake;
@@ -46,6 +47,7 @@ public class TeleopIntake extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        // TODO: add check for stall + add finish condition for pivot
+        return intake.indexerMotor.get() >= speed.speed;
     }
 }

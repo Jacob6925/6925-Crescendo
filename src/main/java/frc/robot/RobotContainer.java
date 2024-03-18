@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 // import frc.robot.commands.TeleopClimber;
-import frc.robot.commands.TeleopIntake;
-import frc.robot.commands.TeleopShooter;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
@@ -63,9 +63,9 @@ public class RobotContainer {
          
         // Register PathPlanner named commands
         NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75), s_Shooter));
-        NamedCommands.registerCommand("Ground Intake", new TeleopIntake(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
-        NamedCommands.registerCommand("Stow Intake", new TeleopIntake(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
-        NamedCommands.registerCommand("Score Gamepiece", new TeleopIntake(s_intake, IndexerSpeed.FEED_SHOOTER));
+        NamedCommands.registerCommand("Ground Intake", new IntakeCommand(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
+        NamedCommands.registerCommand("Stow Intake", new IntakeCommand(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
+        NamedCommands.registerCommand("Score Gamepiece", new IntakeCommand(s_intake, IndexerSpeed.FEED_SHOOTER));
 
 
         //Auto chooser
@@ -90,19 +90,19 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
         //Temporary Shooter Buttons
-        new JoystickButton(operator, 2).whileTrue(new TeleopShooter(s_Shooter, -0.85, -0.85));
-        new JoystickButton(operator, 4).whileTrue(new TeleopShooter(s_Shooter, -0.5, -0.5));
+        new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85));
+        new JoystickButton(operator, 4).whileTrue(new ShooterCommand(s_Shooter, -0.5, -0.5));
        // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
     
         //Temporary Indexer Buttons
-        new JoystickButton(operator, 1).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
-        new JoystickButton(operator, 6).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 12).whileTrue(new TeleopIntake(s_intake, IntakeConstants.IndexerSpeed.AMP));
+        new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
+        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.INTAKE));
+        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_intake, IntakeConstants.IndexerSpeed.AMP));
 
         //Temporary Pivot Buttons
-        new JoystickButton(operator, 5).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.GROUND, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 3).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.STOW));
-        new JoystickButton(operator, 11).onTrue(new TeleopIntake(s_intake, IntakeConstants.PivotState.AMP));
+        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.GROUND, IntakeConstants.IndexerSpeed.INTAKE));
+        new JoystickButton(operator, 3).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.STOW));
+        new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP));
       
         //Temporary Climber Buttons
         // new JoystickButton(operator, 7).whileTrue(new TeleopClimber(s_climber, 0.3, 0));

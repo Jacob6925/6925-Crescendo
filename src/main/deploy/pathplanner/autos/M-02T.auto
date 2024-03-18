@@ -38,12 +38,6 @@
                 "data": {
                   "pathName": "M-P2"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": null
-                }
               }
             ]
           }

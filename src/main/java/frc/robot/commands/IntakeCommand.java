@@ -47,8 +47,9 @@ public class IntakeCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        // TODO: add check for stall + add finish condition for pivot
+        // TODO: add check for stall
         // maybe pg 17 of https://store.ctr-electronics.com/content/user-manual/Falcon%20500%20v3%20User%27s%20Guide.pdf
-        return intake.indexerMotor.get() >= speed.speed;
+        return intake.indexerMotor.get() >= speed.speed && Math.abs(intake.getPosition() - state.pivotSetpoint) <= 1.0;
+        
     }
 }

@@ -30,34 +30,27 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "wait",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M-P2"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Ground Intake"
-                }
-              }
-            ]
+            "waitTime": 1.0
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "Stow Intake"
+            "pathName": "M-P2"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Score Gamepiece"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         },
         {

@@ -1,9 +1,9 @@
-package frc.robot.commands;
+package frc.robot.commands.teleop;
 
 import frc.robot.subsystems.ClimberSubsys;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class ClimberCommand extends Command{
+public class ClimberCommand extends Command {
     private ClimberSubsys climber;
     private double leftSpeed;
     private double rightSpeed;
@@ -29,8 +29,8 @@ public class ClimberCommand extends Command{
         climber.climberOff();
     }
 
-     @Override
-    public boolean isFinished(){
-        return (climber.climberLeft.get() >= leftSpeed) && (climber.climberRight.get() >= rightSpeed);
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }

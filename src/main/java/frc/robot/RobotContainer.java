@@ -13,10 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-// import frc.robot.commands.TeleopClimber;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TeleopSwerve;
+import frc.robot.commands.autonomous.IntakeCommandAuto;
+import frc.robot.commands.autonomous.ShooterCommandAuto;
+import frc.robot.commands.teleop.IntakeCommand;
+import frc.robot.commands.teleop.ShooterCommand;
+import frc.robot.commands.teleop.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
 // import frc. robot.subsystems.ClimberSubsys;
@@ -62,10 +63,10 @@ public class RobotContainer {
         NamedCommands.registerCommand("print hello", Commands.print("hello"));
          
         // Register PathPlanner named commands
-        NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75), s_Shooter));
-        NamedCommands.registerCommand("Ground Intake", new IntakeCommand(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
-        NamedCommands.registerCommand("Stow Intake", new IntakeCommand(s_intake, PivotState.STOW, IntakeSubsys.indexerSpeed));
-        NamedCommands.registerCommand("Score Gamepiece", new IntakeCommand(s_intake, IntakeSubsys.pivotState, IndexerSpeed.FEED_SHOOTER));
+        NamedCommands.registerCommand("Spin Up Shooter", new ShooterCommandAuto(s_Shooter, -0.75,-0.75));
+        NamedCommands.registerCommand("Ground Intake", new IntakeCommandAuto(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
+        NamedCommands.registerCommand("Stow Intake", new IntakeCommandAuto(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
+        NamedCommands.registerCommand("Score Gamepiece", new IntakeCommandAuto(s_intake, IntakeSubsys.pivotState, IndexerSpeed.FEED_SHOOTER));
 
 
         //Auto chooser

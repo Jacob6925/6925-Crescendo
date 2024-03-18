@@ -46,8 +46,10 @@ public class IntakeSubsys extends SubsystemBase {
               Pivot
     ==============================*/
     public void intakePivot(double position) {
-        intakePivotPosition.Position = position;
-        pivotMotor.setControl(intakePivotPosition);
+        if (position != PivotState.NONE.pivotSetpoint) {
+            intakePivotPosition.Position = position;
+            pivotMotor.setControl(intakePivotPosition);
+        }
     }
 
     public void intakePivotPercentOutput(double percentOutput) {

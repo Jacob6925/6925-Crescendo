@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.TeleopClimber;
+// import frc.robot.commands.TeleopClimber;
 import frc.robot.commands.TeleopIntake;
 import frc.robot.commands.TeleopShooter;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
-import frc. robot.subsystems.ClimberSubsys;
+// import frc. robot.subsystems.ClimberSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -66,6 +66,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("Ground Intake", new TeleopIntake(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
         NamedCommands.registerCommand("Stow Intake", new TeleopIntake(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
         NamedCommands.registerCommand("Score Gamepiece", new TeleopIntake(s_intake, IndexerSpeed.FEED_SHOOTER));
+
 
         //Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`

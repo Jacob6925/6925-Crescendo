@@ -12,7 +12,7 @@ public class IntakeConstants {
     public static final double INDEXER_INTAKE_SPEED = 0.4;
     public static final double INDEXER_EJECT_SPEED = -0.1;
     public static final double INDEXER_FEED_SHOOTER_SPEED = -0.7;
-    public static final double INDEXER_PULSE_SPEED = 0.1;
+    public static final double INDEXER_PULSE_SPEED = 0.3;
     public static final double INDEXER_AMP_SPEED = -0.23;
 
     // value not used in code

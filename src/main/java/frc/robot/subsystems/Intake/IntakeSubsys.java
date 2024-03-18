@@ -80,9 +80,9 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
       }
     }
     if (intakeHasNote()) {
-      setIndexerSpeed(IndexerSpeed.NONE);
-       indexerSpeed = IndexerSpeed.PULSE;
-       pivotState = PivotState.STOW; 
+      setIndexerSpeed(IndexerSpeed.PULSE);
+      //  indexerSpeed = IndexerSpeed.PULSE;
+      //  pivotState = PivotState.STOW; 
     }
     SmartDashboard.putString("Intake State", indexerSpeed.toString());
     SmartDashboard.putNumber("Pivot Position", getIntakePivotRotorPosition());

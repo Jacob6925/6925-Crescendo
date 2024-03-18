@@ -30,15 +30,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Ground Intake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M-P2"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "M-P2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": null
+                }
+              }
+            ]
           }
         },
         {

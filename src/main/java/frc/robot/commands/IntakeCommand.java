@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -8,8 +7,8 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 public class IntakeCommand extends Command {
     private final IntakeSubsys intake;
-    private PivotState state;
-    private IndexerSpeed speed;
+    private PivotState state = PivotState.NONE;
+    private IndexerSpeed speed = IndexerSpeed.NONE;
 
     public IntakeCommand(IntakeSubsys intake, PivotState state, IndexerSpeed speed) {
         this.intake = intake;

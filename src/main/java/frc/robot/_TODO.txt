@@ -3,3 +3,7 @@
 - camera
 - set IntakeConstants.INTAKE_PIVOT_SOURCE and IntakeConstants.INTAKE_PIVOT_AMP vars to respective values
 - make sure that climber config work
+- fniish isFinished method for TeleopIntake pivot
+
+- ask Justin about IntakeSubsystem pivot methods
+  - not using most of them as of now

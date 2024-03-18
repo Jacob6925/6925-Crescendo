@@ -8,8 +8,8 @@ public class TeleopClimber extends Command{
     private double leftSpeed;
     private double rightSpeed;
 
-    public TeleopClimber(ClimberSubsys c_climber, double leftSpeed, double rightSpeed){
-        climber = c_climber;
+    public TeleopClimber(ClimberSubsys climber, double leftSpeed, double rightSpeed){
+        this.climber = climber;
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
         addRequirements(climber);
@@ -31,6 +31,6 @@ public class TeleopClimber extends Command{
 
      @Override
     public boolean isFinished(){
-        return false;
+        return (climber.climberLeft.get() >= leftSpeed) && (climber.climberRight.get() >= rightSpeed);
     }
 }

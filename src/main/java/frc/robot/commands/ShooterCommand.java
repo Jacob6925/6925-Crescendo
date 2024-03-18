@@ -31,6 +31,6 @@ public class ShooterCommand extends Command{
 
     @Override
     public boolean isFinished(){
-        return shooter.shooterMotorTop.get() >= top && shooter.shooterMotorBottom.get() >= bottom;
+        return false;
     }
 }

@@ -64,7 +64,7 @@ public class RobotContainer {
         // Register PathPlanner named commands
         NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75), s_Shooter));
         NamedCommands.registerCommand("Ground Intake", new IntakeCommand(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
-        NamedCommands.registerCommand("Stow Intake", new IntakeCommand(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
+        NamedCommands.registerCommand("Stow Intake", new IntakeCommand(s_intake, PivotState.STOW, IntakeSubsys.indexerSpeed));
         NamedCommands.registerCommand("Score Gamepiece", new IntakeCommand(s_intake, IntakeSubsys.pivotState, IndexerSpeed.FEED_SHOOTER));
 
 
@@ -91,8 +91,7 @@ public class RobotContainer {
         
         //Temporary Shooter Buttons
         new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85));
-        new JoystickButton(operator, 4).whileTrue(new ShooterCommand(s_Shooter, -0.5, -0.5));
-       // new JoystickButton(operator, 6).whileTrue(new ShooterCommand(s_Shooter, -0.35));
+        new JoystickButton(operator, 4).whileTrue(new ShooterCommand(s_Shooter, -0.75, -0.75));
     
         //Temporary Indexer Buttons
         new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_intake, IntakeSubsys.pivotState, IntakeConstants.IndexerSpeed.FEED_SHOOTER));

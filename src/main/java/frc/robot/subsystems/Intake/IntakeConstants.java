@@ -53,7 +53,7 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_V = 0.1;
 
     /* Intake Pivot Setpoints */
-    public static final double INTAKE_PIVOT_GROUND = -40.05957; //TODO: Change these values
+    public static final double INTAKE_PIVOT_GROUND = -39.05957; //TODO: Change these values
     public static final double INTAKE_PIVOT_SOURCE = 0;
     public static final double INTAKE_PIVOT_AMP = -17;
     public static final double INTAKE_PIVOT_STOW = -1.0;

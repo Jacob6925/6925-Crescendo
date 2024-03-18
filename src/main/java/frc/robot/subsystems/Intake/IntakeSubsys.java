@@ -86,7 +86,11 @@ public class IntakeSubsys extends SubsystemBase {
 
         if (intakeHasNote()) {
             setIndexerSpeed(IndexerSpeed.NONE);
-            intakePivot(PivotState.STOW.pivotSetpoint);
+            // indexerSpeed = IndexerSpeed.NONE;
+
+            // intakePivot(PivotState.STOW.pivotSetpoint);
+            // pivotState = PivotState.STOW;
+
             /*
             if we want to do this, use the method above
             // indexerSpeed = IndexerSpeed.PULSE;

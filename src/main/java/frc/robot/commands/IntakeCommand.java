@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -41,7 +40,7 @@ public class IntakeCommand extends Command {
     public boolean isFinished() {
         // TODO: add check for stall
         // maybe pg 17 of https://store.ctr-electronics.com/content/user-manual/Falcon%20500%20v3%20User%27s%20Guide.pdf
-        return intake.indexerMotor.get() >= speed.speed && Math.abs(intake.getPosition() - state.pivotSetpoint) <= 1.0;
-        
+        //return intake.indexerMotor.get() >= speed.speed && Math.abs(intake.getPosition() - state.pivotSetpoint) <= 1.0;
+        return false;
     }
 }

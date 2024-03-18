@@ -7,8 +7,8 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 public class IntakeCommand extends Command {
     private final IntakeSubsys intake;
-    private PivotState state = PivotState.NONE;
-    private IndexerSpeed speed = IndexerSpeed.NONE;
+    private final PivotState state;
+    private final IndexerSpeed speed;
 
     public IntakeCommand(IntakeSubsys intake, PivotState state, IndexerSpeed speed) {
         this.intake = intake;

@@ -48,6 +48,7 @@ public class TeleopIntake extends Command {
     @Override
     public boolean isFinished() {
         // TODO: add check for stall + add finish condition for pivot
+        // maybe pg 17 of https://store.ctr-electronics.com/content/user-manual/Falcon%20500%20v3%20User%27s%20Guide.pdf
         return intake.indexerMotor.get() >= speed.speed;
     }
 }

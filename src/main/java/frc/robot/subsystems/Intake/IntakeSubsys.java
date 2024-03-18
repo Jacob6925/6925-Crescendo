@@ -88,8 +88,8 @@ public class IntakeSubsys extends SubsystemBase {
             setIndexerSpeed(IndexerSpeed.NONE);
             // indexerSpeed = IndexerSpeed.NONE;
 
-            // intakePivot(PivotState.STOW.pivotSetpoint);
-            // pivotState = PivotState.STOW;
+            intakePivot(PivotState.STOW.pivotSetpoint);
+            pivotState = PivotState.STOW;
 
             /*
             if we want to do this, use the method above

@@ -20,6 +20,6 @@ public class ShooterCommandAuto extends ShooterCommand {
 
     @Override
     public boolean isFinished(){
-        return shooter.shooterMotorTop.get()+DEADBAND >= top && shooter.shooterMotorBottom.get()+DEADBAND >= bottom;
+        return true;
     }
 }

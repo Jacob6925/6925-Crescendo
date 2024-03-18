@@ -53,14 +53,14 @@ public class IntakeConstants {
     public static final double INTAKE_PIVOT_V = 0.1;
 
     /* Intake Pivot Setpoints */
-    public static final double INTAKE_PIVOT_GROUND = -39.05957; //TODO: Change these values
+    public static final double INTAKE_PIVOT_GROUND = -39; //TODO: Change these values
     public static final double INTAKE_PIVOT_SOURCE = 0;
     public static final double INTAKE_PIVOT_AMP = -17;
-    public static final double INTAKE_PIVOT_STOW = -1.0;
+    public static final double INTAKE_PIVOT_STOW = -5.0;
     
     /* Intake Pivot Motion Magic */
-    public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 95;
-    public static final double INTAKE_PIVOT_ACCELERATION = 140;
+    public static final double INTAKE_PIVOT_CRUISE_VELOCITY = 65;
+    public static final double INTAKE_PIVOT_ACCELERATION = 40;
 
     public enum PivotState {
         NONE(Double.MAX_VALUE),

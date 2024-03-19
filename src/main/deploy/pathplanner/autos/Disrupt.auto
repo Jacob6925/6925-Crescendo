@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4682680793933023,
-      "y": 5.52661562465982
+      "x": 0.8875906640702174,
+      "y": 4.418197725284339
     },
-    "rotation": 0
+    "rotation": 123.6900675259798
   },
   "command": {
     "type": "sequential",
@@ -36,7 +36,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.5
                 }
               },
               {
@@ -49,21 +49,9 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Ground Intake"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "M-P2"
+            "pathName": "Disrupt"
           }
         }
       ]

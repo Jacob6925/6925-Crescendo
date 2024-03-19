@@ -8,8 +8,8 @@ public class ShooterCommand extends Command {
     private final double top;
     private final double bottom;
 
-    public ShooterCommand(ShooterSubsys s_shooter, double top, double bottom){
-        shooter = s_shooter;
+    public ShooterCommand(ShooterSubsys shooter, double top, double bottom) {
+        this.shooter = shooter;
         this.top = top;
         this.bottom = bottom;
 
@@ -26,7 +26,7 @@ public class ShooterCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        // shooter.shooterOff();
+        shooter.shooterOff();
     }
 
     @Override

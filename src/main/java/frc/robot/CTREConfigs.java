@@ -17,7 +17,7 @@ public final class CTREConfigs {
     public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
     public final SoftwareLimitSwitchConfigs climberConfig = new SoftwareLimitSwitchConfigs();
 
-    public CTREConfigs(){
+    public CTREConfigs() {
         /** Swerve CANCoder Configuration */
         swerveCANcoderConfig.MagnetSensor.SensorDirection = Constants.Swerve.cancoderInvert;
 
@@ -102,6 +102,5 @@ public final class CTREConfigs {
         /* Climber Config */
         climberConfig.ForwardSoftLimitEnable = true;
         climberConfig.ForwardSoftLimitThreshold = 0;
-        
     }
 }

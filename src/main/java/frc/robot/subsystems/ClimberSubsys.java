@@ -22,11 +22,11 @@ public class ClimberSubsys extends SubsystemBase {
         climberRight.set(speed);
     }
     
-    public void climberOff(){
+    public void climberOff() {
         climberLeft.set(0);
         climberRight.set(0);
     }
  
     @Override
-    public void periodic(){}
+    public void periodic() {}
 }

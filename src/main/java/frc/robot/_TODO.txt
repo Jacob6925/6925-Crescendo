@@ -2,10 +2,7 @@
   - when limit switch is detected: IntakeSpeed.NONE, PivotState.STOW
 - camera
 - set IntakeConstants.INTAKE_PIVOT_SOURCE vars to respective values
-- make sure that climber config works
-- finish isFinished method for TeleopIntake pivot
-- make sure all isFinished methods work
-- change DEADBAND value for ShooterCommandAuto
 
-- ask Justin about IntakeSubsystem pivot methods
-  - not using most of them as of now
+- make sure that uncommenting ShooterCommand end method didn't break anything
+- change IntakeConstants.INTAKE_PIVOT_GROUND back to original val
+- maybe: implement SquaredInput

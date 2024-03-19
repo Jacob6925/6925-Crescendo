@@ -25,7 +25,7 @@ public class IntakeCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (state != null) intake.intakePivot(state.pivotSetpoint);
+        if (state != null) intake.setPivotState(state);
         if (speed != null) intake.setIndexerSpeed(speed);
     }
 

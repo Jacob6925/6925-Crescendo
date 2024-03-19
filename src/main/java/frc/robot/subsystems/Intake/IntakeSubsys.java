@@ -25,7 +25,6 @@ public class IntakeSubsys extends SubsystemBase {
 
     // Motion Magic
     private final PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
-    private final DutyCycleOut intakePivotPercentOutput = new DutyCycleOut(0);
 
     public IntakeSubsys() {
         pivotMotor.getConfigurator().apply(Robot.ctreConfigs.intakePivotFXConfig);
@@ -44,16 +43,12 @@ public class IntakeSubsys extends SubsystemBase {
     /*============================
               Pivot
     ==============================*/
-    public void intakePivot(double position) {
-        if (position != PivotState.NONE.pivotSetpoint) {
-            intakePivotPosition.Position = position;
+    public void setPivotState(PivotState position) {
+        if (position != PivotState.NONE) {
+            intakePivotPosition.Position = position.pivotSetpoint;
             pivotMotor.setControl(intakePivotPosition);
+            pivotState = position;
         }
-    }
-
-    public void intakePivotPercentOutput(double percentOutput) {
-        intakePivotPercentOutput.Output = percentOutput;
-        pivotMotor.setControl(intakePivotPercentOutput);
     }
 
     public void resetIntakePivot() {
@@ -86,10 +81,10 @@ public class IntakeSubsys extends SubsystemBase {
         //     }
         // }
 
-        if (intakeHasNote()) {
+        if (intakeHasNote() && pivotState == PivotState.GROUND && indexerMotor.get() > 0.05) {
             Commands.runOnce(() -> {
                 setIndexerSpeed(IndexerSpeed.NONE);
-                intakePivot(PivotState.STOW.pivotSetpoint);
+                setPivotState(PivotState.STOW);
             }, this);
         }
 
@@ -104,5 +99,3 @@ public class IntakeSubsys extends SubsystemBase {
     }
 
 }
-
-//&& indexerMotor.get() > 0

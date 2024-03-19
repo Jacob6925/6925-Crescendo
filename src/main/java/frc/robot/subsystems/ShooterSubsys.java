@@ -9,31 +9,30 @@ public class ShooterSubsys extends SubsystemBase {
 
     private final double MAX_VALUE = 0.5;
     
-    public ShooterSubsys(){
+    public ShooterSubsys() {
         shooterMotorBottom.setInverted(true);
     }
 
-    public void setMotor(double top, double bottom){
+    public void setMotor(double top, double bottom) {
         shooterMotorTop.set(top);
         shooterMotorBottom.set(bottom);
     }
     
-    public void intake(){
+    public void intake() {
         shooterMotorTop.set(MAX_VALUE);
         shooterMotorBottom.set(MAX_VALUE);
     }
 
-    public void outake(){
+    public void outake() {
         shooterMotorTop.set(-MAX_VALUE);
         shooterMotorBottom.set(-MAX_VALUE);
     }
 
-    public void shooterOff(){
+    public void shooterOff() {
         shooterMotorTop.set(0);
         shooterMotorBottom.set(0);
     }
 
     @Override
-    public void periodic(){
-    }  
+    public void periodic() {}  
 }

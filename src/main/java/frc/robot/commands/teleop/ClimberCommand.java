@@ -10,8 +10,8 @@ public class ClimberCommand extends Command {
 
     public ClimberCommand(ClimberSubsys climber, double leftSpeed, double rightSpeed) {
         this.climber = climber;
-        this.leftSpeed = leftSpeed;
-        this.rightSpeed = rightSpeed;
+        this.leftSpeed = leftSpeed*-1;
+        this.rightSpeed = rightSpeed*-1;
 
         addRequirements(climber);
     }

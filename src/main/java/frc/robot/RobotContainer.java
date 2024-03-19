@@ -99,27 +99,19 @@ public class RobotContainer {
             )
         );
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        
-        //Temporary Shooter Buttons
-        new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85));
-        new JoystickButton(operator, 4).whileTrue(new ShooterCommand(s_Shooter, -0.75, -0.75));
-    
-        //Temporary Indexer Buttons
-        new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.FEED_SHOOTER));
-        new JoystickButton(operator, 6).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.AMP));
 
-        //Temporary Pivot Buttons
-        new JoystickButton(operator, 5).onTrue(new IntakeCommand(s_Intake, IntakeConstants.PivotState.GROUND, IntakeConstants.IndexerSpeed.INTAKE));
-        new JoystickButton(operator, 3).onTrue(new IntakeCommand(s_Intake, IntakeConstants.PivotState.STOW, null));
-        new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_Intake, IntakeConstants.PivotState.AMP, null));
-      
-        //Temporary Climber Buttons
-        new JoystickButton(operator, 7).whileTrue(new ClimberCommand(s_Climber, 0.3, 0));
-        new JoystickButton(operator, 8).whileTrue(new ClimberCommand(s_Climber, 0, 0.3));
-        new JoystickButton(operator, 9).whileTrue(new ClimberCommand(s_Climber, -0.3, 0));
-        new JoystickButton(operator, 10).whileTrue(new ClimberCommand(s_Climber, 0, -0.3));
-
+        new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.FEED_SHOOTER)); // 1 - feed shooter
+        new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85)); // 2 - start shooter
+        new JoystickButton(operator, 3).whileTrue(new ClimberCommand(s_Climber, -0.3, 0)); // 3 - left climber down
+        new JoystickButton(operator, 4).whileTrue(new ClimberCommand(s_Climber, 0, -0.3)); // 4 - right climber down
+        new JoystickButton(operator, 5).whileTrue(new ClimberCommand(s_Climber, 0.3, 0)); // 5 - left climber up
+        new JoystickButton(operator, 6).whileTrue(new ClimberCommand(s_Climber, 0, 0.3)); // 6 - right climber up
+        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.AMP)); // 7 - amp pivot
+        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.INTAKE)); // 8 - amp indexer
+        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 9 - intake (centering)
+        // new JoystickButton(operator, 10).onTrue(); // 10 - HP
+        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.EJECT)); // 11 - intake out
+        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 12 - intake in
     }
 
     /**

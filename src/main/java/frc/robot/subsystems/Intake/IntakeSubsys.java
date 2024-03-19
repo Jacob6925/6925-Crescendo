@@ -3,9 +3,9 @@ package frc.robot.subsystems.Intake;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+//import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Commands;
+//import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -14,7 +14,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 public class IntakeSubsys extends SubsystemBase {
 
     //Device ID
-    private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
+    //private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
     public final TalonFX indexerMotor =  new TalonFX(14);
     public final TalonFX pivotMotor = new TalonFX(15);
 
@@ -80,21 +80,21 @@ public class IntakeSubsys extends SubsystemBase {
         //     }
         // }
 
-        if (intakeHasNote() && pivotState == PivotState.GROUND && indexerMotor.get() > 0.05) {
-            Commands.runOnce(() -> {
-                setIndexerSpeed(IndexerSpeed.NONE);
-                setPivotState(PivotState.STOW);
-            }, this);
-        }
+        // if (intakeHasNote() && pivotState == PivotState.GROUND && indexerMotor.get() > 0.05) {
+        //     Commands.runOnce(() -> {
+        //         setIndexerSpeed(IndexerSpeed.NONE);
+        //         setPivotState(PivotState.STOW);
+        //     }, this);
+        // }
 
         SmartDashboard.putString("Intake State", indexerSpeed.toString());
         SmartDashboard.putNumber("Pivot Position", getIntakePivotRotorPosition());
-        SmartDashboard.putBoolean("Note in intake", intakeHasNote());
+        // SmartDashboard.putBoolean("Note in intake", intakeHasNote());
     }
 
-    public boolean intakeHasNote() {
-        // NOTE: this is intentionally inverted, because the limit switch is normally closed
-        return !intakeLimitSwitch.get();
-    }
+    // public boolean intakeHasNote() {
+    //     // NOTE: this is intentionally inverted, because the limit switch is normally closed
+    //     return !intakeLimitSwitch.get();
+    // }
 
 }

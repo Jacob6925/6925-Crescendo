@@ -4,5 +4,4 @@
 - set IntakeConstants.INTAKE_PIVOT_SOURCE vars to respective values
 
 - make sure that uncommenting ShooterCommand end method didn't break anything
-- change IntakeConstants.INTAKE_PIVOT_GROUND back to original val
 - maybe: implement SquaredInput

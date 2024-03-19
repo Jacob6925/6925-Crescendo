@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.autonomous.IntakeCommandAuto;
 import frc.robot.commands.autonomous.ShooterCommandAuto;
+import frc.robot.commands.teleop.ClimberCommand;
 import frc.robot.commands.teleop.IntakeCommand;
 import frc.robot.commands.teleop.ShooterCommand;
 import frc.robot.commands.teleop.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
-// import frc. robot.subsystems.ClimberSubsys;
+import frc. robot.subsystems.ClimberSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -45,7 +44,7 @@ public class RobotContainer {
     private final SwerveSubsys s_Swerve = new SwerveSubsys();
     private final ShooterSubsys s_Shooter = new ShooterSubsys();
     private final IntakeSubsys s_intake = new IntakeSubsys();
-    // private final ClimberSubsys s_climber = new ClimberSubsys();
+    private final ClimberSubsys s_climber = new ClimberSubsys();
 
      /* AutoChooser */
     private final SendableChooser<Command> autoChooser;
@@ -56,25 +55,27 @@ public class RobotContainer {
         
         // Configure the button bindings
         configureButtonBindings();
-        
-        //Pathplanner commands - templates
-        // NamedCommands.registerCommand("Spin Up Shooter", new SpinUpShooter(s_Shooter));
 
-        NamedCommands.registerCommand("testTwo", Commands.print("Passed marker 2"));
-        NamedCommands.registerCommand("print hello", Commands.print("hello"));
-         
         // Register PathPlanner named commands
         NamedCommands.registerCommand("Spin Up Shooter", new ShooterCommandAuto(s_Shooter, -0.75,-0.75));
-        NamedCommands.registerCommand("Ground Intake", new IntakeCommandAuto(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
-        NamedCommands.registerCommand("Stow Intake", new IntakeCommandAuto(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
-        NamedCommands.registerCommand("Score Gamepiece",
-            new SequentialCommandGroup(
-                new IntakeCommandAuto(s_intake, PivotState.NONE, IndexerSpeed.FEED_SHOOTER),
-                Commands.waitSeconds(0.5),
-                new IntakeCommandAuto(s_intake, PivotState.NONE, IndexerSpeed.NONE)
-            )
-        );
-
+        // NamedCommands.registerCommand("Ground Intake", new IntakeCommandAuto(s_intake, PivotState.GROUND, IndexerSpeed.INTAKE));
+        NamedCommands.registerCommand("Ground Intake", new InstantCommand(() -> {
+            s_intake.intakePivot(PivotState.GROUND.pivotSetpoint);
+            s_intake.setIndexerSpeed(IndexerSpeed.INTAKE);
+        }, s_intake));
+        // NamedCommands.registerCommand("Stow Intake", new IntakeCommandAuto(s_intake, PivotState.STOW, IndexerSpeed.PULSE));
+        NamedCommands.registerCommand("Stow Intake", new InstantCommand(() -> {
+            s_intake.intakePivot(PivotState.STOW.pivotSetpoint);
+            s_intake.setIndexerSpeed(IndexerSpeed.PULSE);
+        }, s_intake));
+        // NamedCommands.registerCommand("Score Gamepiece", new IntakeCommandAuto(s_intake, PivotState.NONE, IndexerSpeed.FEED_SHOOTER));
+        NamedCommands.registerCommand("Score Gamepiece", new InstantCommand(() -> {
+            s_intake.intakePivot(PivotState.NONE.pivotSetpoint);
+            s_intake.setIndexerSpeed(IndexerSpeed.FEED_SHOOTER);
+        }, s_intake));
+        NamedCommands.registerCommand("Stop Indexer", new InstantCommand(() -> {
+            s_intake.setIndexerSpeed(IndexerSpeed.NONE);
+        }, s_intake));
 
         //Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
@@ -112,10 +113,10 @@ public class RobotContainer {
         new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_intake, IntakeConstants.PivotState.AMP, null));
       
         //Temporary Climber Buttons
-        // new JoystickButton(operator, 7).whileTrue(new TeleopClimber(s_climber, 0.3, 0));
-        // new JoystickButton(operator, 8).whileTrue(new TeleopClimber(s_climber, 0, 0.3));
-        // new JoystickButton(operator, 9).whileTrue(new TeleopClimber(s_climber, -0.3, 0));
-        // new JoystickButton(operator, 10).whileTrue(new TeleopClimber(s_climber, 0, -0.3));
+        new JoystickButton(operator, 7).whileTrue(new ClimberCommand(s_climber, 0.3, 0));
+        new JoystickButton(operator, 8).whileTrue(new ClimberCommand(s_climber, 0, 0.3));
+        new JoystickButton(operator, 9).whileTrue(new ClimberCommand(s_climber, -0.3, 0));
+        new JoystickButton(operator, 10).whileTrue(new ClimberCommand(s_climber, 0, -0.3));
 
     }
 

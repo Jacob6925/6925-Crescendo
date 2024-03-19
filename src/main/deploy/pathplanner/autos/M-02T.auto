@@ -24,39 +24,46 @@
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Score Gamepiece"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score Gamepiece"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 1.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Stop Indexer"
+                }
+              }
+            ]
           }
         },
         {
           "type": "wait",
           "data": {
             "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Ground Intake"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "M-P2"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Score Gamepiece"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "M-Taxi"
           }
         }
       ]

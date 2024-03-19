@@ -100,8 +100,8 @@ public final class CTREConfigs {
         intakePivotMotionMagic.MotionMagicAcceleration = IntakeConstants.INTAKE_PIVOT_ACCELERATION;
 
         /* Climber Config */
-        climberConfig.ReverseSoftLimitEnable = true;
-        climberConfig.ReverseSoftLimitThreshold = 0;
+        climberConfig.ForwardSoftLimitEnable = true;
+        climberConfig.ForwardSoftLimitThreshold = 0;
         
     }
 }

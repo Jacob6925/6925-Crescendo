@@ -73,9 +73,9 @@ public class RobotContainer {
             s_Intake.setIndexerSpeed(IndexerSpeed.FEED_SHOOTER);
         }, s_Intake));
         
-        NamedCommands.registerCommand("Stop Indexer", new InstantCommand(() -> {
-            s_Intake.setIndexerSpeed(IndexerSpeed.NONE);
-        }, s_Intake));
+        NamedCommands.registerCommand("Stop Indexer", new InstantCommand(() -> s_Intake.setIndexerSpeed(IndexerSpeed.NONE), s_Intake));
+
+        NamedCommands.registerCommand("Stop Shooter", new InstantCommand(() -> s_Shooter.shooterOff(), s_Shooter));
 
         
 

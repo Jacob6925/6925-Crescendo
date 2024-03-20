@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4682680793933023,
-      "y": 5.52661562465982
+      "x": 1.47,
+      "y": 5.53
     },
     "rotation": 0
   },
@@ -124,69 +124,6 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M-P1-A"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stow Intake"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M-P1-B"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Score Gamepiece"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stop Indexer"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Ground Intake"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
                   "pathName": "M-P3-A"
                 }
               }
@@ -238,79 +175,9 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.8
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Ground Intake"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M-P4-A"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stow Intake"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M-P4-B"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Score Gamepiece"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stop Indexer"
-                }
-              }
-            ]
+            "pathName": "Taxi"
           }
         }
       ]

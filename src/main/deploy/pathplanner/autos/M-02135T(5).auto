@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4682680793933023,
-      "y": 5.52661562465982
+      "x": 1.47,
+      "y": 5.53
     },
     "rotation": 0
   },
@@ -263,7 +263,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M-P4-A"
+                  "pathName": "M-P5-A"
                 }
               }
             ]
@@ -282,7 +282,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M-P4-B"
+                  "pathName": "M-P5-B"
                 }
               }
             ]

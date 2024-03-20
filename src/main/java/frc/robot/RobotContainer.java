@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.autonomous.ShooterCommandAuto;
 import frc.robot.commands.teleop.ClimberCommand;
 import frc.robot.commands.teleop.IntakeCommand;
 import frc.robot.commands.teleop.ShooterCommand;
@@ -56,7 +55,7 @@ public class RobotContainer {
         configureButtonBindings();
 
         // Register PathPlanner named commands
-        NamedCommands.registerCommand("Spin Up Shooter", new ShooterCommandAuto(s_Shooter, -0.75,-0.75));
+        NamedCommands.registerCommand("Spin Up Shooter", new InstantCommand(() -> s_Shooter.setMotor(-0.75,-0.75)));
 
         NamedCommands.registerCommand("Ground Intake", new InstantCommand(() -> {
             s_Intake.setPivotState(PivotState.GROUND);
@@ -106,12 +105,12 @@ public class RobotContainer {
         new JoystickButton(operator, 4).whileTrue(new ClimberCommand(s_Climber, 0, -0.3)); // 4 - right climber down
         new JoystickButton(operator, 5).whileTrue(new ClimberCommand(s_Climber, 0.3, 0)); // 5 - left climber up
         new JoystickButton(operator, 6).whileTrue(new ClimberCommand(s_Climber, 0, 0.3)); // 6 - right climber up
-        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.AMP)); // 7 - amp pivot
-        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.INTAKE)); // 8 - amp indexer
-        new JoystickButton(operator, 9).onTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 9 - intake (centering)
+        new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.NONE)); // 7 - amp pivot
+        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_Intake, PivotState.NONE, IndexerSpeed.AMP)); // 8 - amp indexer
+        new JoystickButton(operator, 9).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 9 - intake (centering)
         // new JoystickButton(operator, 10).onTrue(); // 10 - HP
-        new JoystickButton(operator, 11).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.EJECT)); // 11 - intake out
-        new JoystickButton(operator, 12).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 12 - intake in
+        new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_Intake, PivotState.GROUND, IndexerSpeed.INTAKE)); // 11 - intake out
+        new JoystickButton(operator, 12).onTrue(new IntakeCommand(s_Intake, PivotState.STOW, IndexerSpeed.NONE)); // 12 - intake in
     }
 
     /**

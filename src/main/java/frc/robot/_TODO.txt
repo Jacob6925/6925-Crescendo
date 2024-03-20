@@ -1,7 +1,5 @@
 - limit switch
   - when limit switch is detected: IntakeSpeed.NONE, PivotState.STOW
-- camera
 - set IntakeConstants.INTAKE_PIVOT_SOURCE vars to respective values
 
-- make sure that uncommenting ShooterCommand end method didn't break anything
 - maybe: implement SquaredInput

@@ -113,7 +113,7 @@ public class RobotContainer {
         new JoystickButton(operator, 5).whileTrue(new ClimberCommand(s_Climber, 0.3, 0)); // 5 - left climber up
         new JoystickButton(operator, 6).whileTrue(new ClimberCommand(s_Climber, 0, 0.3)); // 6 - right climber up
         new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.NONE)); // 7 - amp pivot
-        new JoystickButton(operator, 8).onTrue(new IntakeCommand(s_Intake, PivotState.NONE, IndexerSpeed.AMP)); // 8 - amp indexer
+        new JoystickButton(operator, 8).whileTrue(new IntakeCommand(s_Intake, PivotState.NONE, IndexerSpeed.AMP)); // 8 - amp indexer
         new JoystickButton(operator, 9).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 9 - intake (centering)
         // new JoystickButton(operator, 10).onTrue(); // 10 - HP
         new JoystickButton(operator, 11).onTrue(new IntakeCommand(s_Intake, PivotState.GROUND, IndexerSpeed.INTAKE)); // 11 - intake out

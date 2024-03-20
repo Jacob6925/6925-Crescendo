@@ -94,4 +94,13 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  @Override
+  public void autonomousExit() {
+    RobotContainer.getInstance().getAutonomousCommand().cancel();
+    // RobotContainer instance = RobotContainer.getInstance();
+    // instance.s_Climber
+    // instance.s_Intake
+    // instance.s_Shooter
+  } 
 }

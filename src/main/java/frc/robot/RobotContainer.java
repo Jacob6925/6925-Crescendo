@@ -46,10 +46,17 @@ public class RobotContainer {
 
      /* AutoChooser */
     private final SendableChooser<Command> autoChooser;
+
+    public static RobotContainer instance;
+    
+    public static RobotContainer getInstance() {
+        return instance;
+    }
    
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+        instance = this;
         
         // Configure the button bindings
         configureButtonBindings();

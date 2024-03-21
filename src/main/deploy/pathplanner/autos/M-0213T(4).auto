@@ -242,6 +242,12 @@
           "data": {
             "pathName": "Taxi"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
+          }
         }
       ]
     }

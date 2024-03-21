@@ -19,8 +19,8 @@ public class IntakeSubsys extends SubsystemBase {
     private final TalonFX pivotMotor = new TalonFX(15);
 
     //States
-    public static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
-    public static PivotState pivotState = PivotState.NONE;
+    private IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
+    private PivotState pivotState = PivotState.NONE;
 
     // Motion Magic
     private final PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
@@ -87,7 +87,8 @@ public class IntakeSubsys extends SubsystemBase {
         //     }, this);
         // }
 
-        SmartDashboard.putString("Intake State", indexerSpeed.toString());
+        SmartDashboard.putString("Intake State", indexerSpeed.name());
+        SmartDashboard.putString("Pivot State", pivotState.name());
         SmartDashboard.putNumber("Pivot Position", getIntakePivotRotorPosition());
         // SmartDashboard.putBoolean("Note in intake", intakeHasNote());
     }

@@ -11,7 +11,7 @@ public abstract class ClimberSubsysBase extends SubsystemBase {
         climbers.add(this);
     }
     
-    public void climberOff() {
+    public static void climberOff() {
         climbers.forEach(climber -> climber.motorOff());
     }
 

@@ -2,6 +2,7 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.climber.ClimberLeft;
+import frc.robot.subsystems.climber.ClimberSubsysBase;
 
 public class ClimberLeftCommand extends Command {
     private final ClimberLeft climberLeft;
@@ -24,7 +25,7 @@ public class ClimberLeftCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        climberLeft.climberOff(); // turns both left and right off
+        ClimberSubsysBase.climberOff();
     }
 
     @Override

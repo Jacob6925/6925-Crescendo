@@ -41,11 +41,11 @@ public class RobotContainer {
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
-    private final SwerveSubsys s_Swerve = new SwerveSubsys();
-    private final ShooterSubsys s_Shooter = new ShooterSubsys();
-    private final IntakeSubsys s_Intake = new IntakeSubsys();
-    private final ClimberLeft s_ClimberLeft = new ClimberLeft();
-    private final ClimberRight s_ClimberRight = new ClimberRight();
+    public final SwerveSubsys s_Swerve = new SwerveSubsys();
+    public final ShooterSubsys s_Shooter = new ShooterSubsys();
+    public final IntakeSubsys s_Intake = new IntakeSubsys();
+    public final ClimberLeft s_ClimberLeft = new ClimberLeft();
+    public final ClimberRight s_ClimberRight = new ClimberRight();
 
      /* AutoChooser */
     private final SendableChooser<Command> autoChooser;

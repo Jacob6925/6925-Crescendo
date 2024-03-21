@@ -1,9 +1,9 @@
-package frc.robot.commands.teleop;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Intake.IntakeSubsys;
-import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
-import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
+import frc.robot.subsystems.intake.IntakeSubsys;
+import frc.robot.subsystems.intake.IntakeConstants.IndexerSpeed;
+import frc.robot.subsystems.intake.IntakeConstants.PivotState;
 
 public class IntakeCommand extends Command {
     private final IntakeSubsys intake;

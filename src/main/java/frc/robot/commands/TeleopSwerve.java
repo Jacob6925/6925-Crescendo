@@ -1,4 +1,4 @@
-package frc.robot.commands.teleop;
+package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsys;

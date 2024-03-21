@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Intake;
+package frc.robot.subsystems.intake;
 
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
-import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
-import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
+import frc.robot.subsystems.intake.IntakeConstants.IndexerSpeed;
+import frc.robot.subsystems.intake.IntakeConstants.PivotState;
 
 public class IntakeSubsys extends SubsystemBase {
 

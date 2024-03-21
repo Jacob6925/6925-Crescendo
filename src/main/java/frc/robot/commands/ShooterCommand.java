@@ -1,4 +1,4 @@
-package frc.robot.commands.teleop;
+package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsys;
 import edu.wpi.first.wpilibj2.command.Command;

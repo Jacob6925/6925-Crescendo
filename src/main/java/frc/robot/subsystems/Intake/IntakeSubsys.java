@@ -15,8 +15,8 @@ public class IntakeSubsys extends SubsystemBase {
 
     //Device ID
     //private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
-    public final TalonFX indexerMotor =  new TalonFX(14);
-    public final TalonFX pivotMotor = new TalonFX(15);
+    private final TalonFX indexerMotor =  new TalonFX(14);
+    private final TalonFX pivotMotor = new TalonFX(15);
 
     //States
     public static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;

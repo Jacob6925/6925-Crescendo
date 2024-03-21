@@ -4,8 +4,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsys extends SubsystemBase {
-    public final TalonFX shooterMotorTop = new TalonFX(12);
-    public final TalonFX shooterMotorBottom = new TalonFX(13);
+    private final TalonFX shooterMotorTop = new TalonFX(12);
+    private final TalonFX shooterMotorBottom = new TalonFX(13);
 
     private final double MAX_VALUE = 0.5;
     

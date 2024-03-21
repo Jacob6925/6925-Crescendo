@@ -1,19 +1,22 @@
 package frc.robot.commands.teleop;
 
-import frc.robot.subsystems.ClimberSubsys;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.climber.ClimberLeft;
+import frc.robot.subsystems.climber.ClimberRight;
 
 public class ClimberCommand extends Command {
-    private final ClimberSubsys climber;
+    private final ClimberLeft climberLeft;
+    private final ClimberRight climberRight;
     private final double leftSpeed;
     private final double rightSpeed;
 
-    public ClimberCommand(ClimberSubsys climber, double leftSpeed, double rightSpeed) {
-        this.climber = climber;
-        this.leftSpeed = leftSpeed*-1;
-        this.rightSpeed = rightSpeed*-1;
+    public ClimberCommand(ClimberLeft climberLeft, ClimberRight climberRight, double leftSpeed, double rightSpeed) {
+        this.climberLeft = climberLeft;
+        this.climberRight = climberRight;
+        this.leftSpeed = leftSpeed;
+        this.rightSpeed = rightSpeed;
 
-        addRequirements(climber);
+        addRequirements(climberLeft, climberRight);
     }
 
     @Override
@@ -21,13 +24,14 @@ public class ClimberCommand extends Command {
 
     @Override
     public void execute() {
-        climber.setLeft(leftSpeed);
-        climber.setRight(rightSpeed);
+        climberLeft.setSpeed(leftSpeed);
+        climberRight.setSpeed(rightSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        climber.climberOff();
+        climberLeft.climberOff();
+        // same thing as climberRight.climberOff();
     }
 
     @Override

@@ -31,6 +31,7 @@ public class SwerveSubsys extends SubsystemBase {
     private final SwerveModule[] mSwerveMods;
     private final Pigeon2 gyro;
     // private final Field2d field = new Field2d();
+    private boolean halfSpeed = false;
 
     public SwerveSubsys() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
@@ -74,6 +75,10 @@ public class SwerveSubsys extends SubsystemBase {
         // SmartDashboard.putData("Field", field);
     }
 
+    public void toggleHalfSpeed() {
+        halfSpeed = !halfSpeed;
+    }
+
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
@@ -89,7 +94,7 @@ public class SwerveSubsys extends SubsystemBase {
                     rotation
                 )
             );
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed*(halfSpeed ? 0.5 : 1));
 
         for(SwerveModule mod : mSwerveMods) {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
@@ -169,5 +174,7 @@ public class SwerveSubsys extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
         }
+
+        SmartDashboard.putBoolean("0.5x Speed", halfSpeed);
     }
 }

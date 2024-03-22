@@ -19,10 +19,10 @@ import frc.robot.commands.teleop.TeleopSwerve;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
 import frc. robot.subsystems.ClimberSubsys;
-import frc.robot.subsystems.intake.IntakeConstants;
-import frc.robot.subsystems.intake.IntakeSubsys;
-import frc.robot.subsystems.intake.IntakeConstants.IndexerSpeed;
-import frc.robot.subsystems.intake.IntakeConstants.PivotState;
+import frc.robot.subsystems.Intake.IntakeConstants;
+import frc.robot.subsystems.Intake.IntakeSubsys;
+import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
+import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 public class RobotContainer {
     /* Controllers */

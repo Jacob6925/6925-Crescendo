@@ -8,7 +8,7 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
-import frc.robot.subsystems.intake.IntakeConstants;
+import frc.robot.subsystems.Intake.IntakeConstants;
 
 public final class CTREConfigs {
     public final TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();

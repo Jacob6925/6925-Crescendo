@@ -15,7 +15,6 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -24,15 +23,14 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveSubsys extends SubsystemBase {
-    public SwerveDriveOdometry swerveOdometry;
-    public SwerveModule[] mSwerveMods;
-    public Pigeon2 gyro;
-    private Field2d field = new Field2d();
+    private final SwerveDriveOdometry swerveOdometry;
+    private final SwerveModule[] mSwerveMods;
+    private final Pigeon2 gyro;
+    // private final Field2d field = new Field2d();
 
     public SwerveSubsys() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
@@ -50,46 +48,47 @@ public class SwerveSubsys extends SubsystemBase {
 
         // Configure the AutoBuilder last
         AutoBuilder.configureHolonomic(
-        this::getPose, // Robot pose supplier
-        this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
-        this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-        this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
-        new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-            new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
-            4.5, // Max module speed, in m/s
-            0.4, // Drive base radius in meters. Distance from robot center to furthest module.
-            new ReplanningConfig() // Default path replanning config. See the API for the options here
-               ),
-               () -> {
-                    Optional<Alliance> alliance = DriverStation.getAlliance();
-                    if (alliance.isPresent()) {
+            this::getPose, // Robot pose supplier
+            this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
+            this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+            this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+            new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+                new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                4.5, // Max module speed, in m/s
+                0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                new ReplanningConfig() // Default path replanning config. See the API for the options here
+            ),
+            () -> {
+                Optional<Alliance> alliance = DriverStation.getAlliance();
+                if (alliance.isPresent()) {
                     return alliance.get() == DriverStation.Alliance.Red;
-                    }
-                 return false;
+                }
+                return false;
             },
-               this // Reference to this subsystem to set requirements
-           );
-               // Set up custom logging to add the current path to a field 2d widget
-               PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
-       
-               SmartDashboard.putData("Field", field);
+            this // Reference to this subsystem to set requirements
+        );
+        // Set up custom logging to add the current path to a field 2d widget
+        // PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
+
+        // SmartDashboard.putData("Field", field);
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation, 
-                                    getHeading()
-                                )
-                                : new ChassisSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation)
-                                );
+                    translation.getX(), 
+                    translation.getY(), 
+                    rotation, 
+                    getHeading()
+                )
+                : new ChassisSpeeds(
+                    translation.getX(), 
+                    translation.getY(), 
+                    rotation
+                )
+            );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
         for(SwerveModule mod : mSwerveMods) {
@@ -168,7 +167,7 @@ public class SwerveSubsys extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods) {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);  
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
         }
     }
 }

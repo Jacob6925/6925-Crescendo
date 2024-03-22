@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousExit() {
-    RobotContainer.getInstance().getAutonomousCommand().cancel();
+    RobotContainer.getInstance().s_Shooter.shooterOff();
     // RobotContainer instance = RobotContainer.getInstance();
     // instance.s_Climber
     // instance.s_Intake

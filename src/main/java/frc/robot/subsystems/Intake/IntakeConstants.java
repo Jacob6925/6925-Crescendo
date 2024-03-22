@@ -13,7 +13,7 @@ public class IntakeConstants {
     public static final double INDEXER_EJECT_SPEED = -0.1;
     public static final double INDEXER_FEED_SHOOTER_SPEED = -0.7;
     public static final double INDEXER_PULSE_SPEED = 0.4;
-    public static final double INDEXER_AMP_SPEED = -0.207;
+    public static final double INDEXER_AMP_SPEED = -0.215;
 
     public enum IndexerSpeed {
         NONE(0.0),
@@ -52,7 +52,7 @@ public class IntakeConstants {
     /* Intake Pivot Setpoints */
     public static final double INTAKE_PIVOT_GROUND = -41;
     public static final double INTAKE_PIVOT_SOURCE = 0;
-    public static final double INTAKE_PIVOT_AMP = -17.6;
+    public static final double INTAKE_PIVOT_AMP = -18;
     public static final double INTAKE_PIVOT_STOW = -1;
     
     /* Intake Pivot Motion Magic */

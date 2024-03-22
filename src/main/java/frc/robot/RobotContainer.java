@@ -19,12 +19,12 @@ import frc.robot.commands.climber.ClimberLeftCommand;
 import frc.robot.commands.climber.ClimberRightCommand;
 import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
+import frc.robot.subsystems.Intake.IntakeConstants;
+import frc.robot.subsystems.Intake.IntakeSubsys;
+import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
+import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 import frc.robot.subsystems.climber.ClimberLeft;
 import frc.robot.subsystems.climber.ClimberRight;
-import frc.robot.subsystems.intake.IntakeConstants;
-import frc.robot.subsystems.intake.IntakeSubsys;
-import frc.robot.subsystems.intake.IntakeConstants.IndexerSpeed;
-import frc.robot.subsystems.intake.IntakeConstants.PivotState;
 
 public class RobotContainer {
     /* Controllers */

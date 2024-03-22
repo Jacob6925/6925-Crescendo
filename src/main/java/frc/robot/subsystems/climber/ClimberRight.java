@@ -9,6 +9,7 @@ public class ClimberRight extends ClimberSubsysBase {
 
     public ClimberRight() {
         climber.getConfigurator().apply(Robot.ctreConfigs.climberConfig);
+        climber.getConfigurator().apply(Robot.ctreConfigs.climbeFxConfiguration);
         climber.setInverted(true);
     }
 

@@ -7,6 +7,7 @@ import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.subsystems.intake.IntakeConstants;
 
@@ -16,6 +17,7 @@ public final class CTREConfigs {
     public final TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
     public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
     public final SoftwareLimitSwitchConfigs climberConfig = new SoftwareLimitSwitchConfigs();
+    public final TalonFXConfiguration climbeFxConfiguration = new TalonFXConfiguration();
 
     public CTREConfigs() {
         /** Swerve CANCoder Configuration */
@@ -102,5 +104,6 @@ public final class CTREConfigs {
         /* Climber Config */
         climberConfig.ForwardSoftLimitEnable = true;
         climberConfig.ForwardSoftLimitThreshold = 0;
+        climbeFxConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     }
 }

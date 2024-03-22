@@ -73,7 +73,7 @@ public class SwerveSubsys extends SubsystemBase {
                // Set up custom logging to add the current path to a field 2d widget
                PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
        
-               SmartDashboard.putData("Field", field);
+            //    SmartDashboard.putData("Field", field);
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {

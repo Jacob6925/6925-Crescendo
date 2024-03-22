@@ -105,9 +105,11 @@ public class RobotContainer {
         );
         // Zerp Gyro
         new JoystickButton(driver, XboxController.Button.kY.value).onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        // Toggle Half Speed
-        new JoystickButton(driver, XboxController.Button.kRightBumper.value).onTrue(new InstantCommand(() -> {s_Swerve.toggleHalfSpeed();}, s_Swerve));
-
+        // Toggle Half Speed (start a new scope for toggleHalfSpeedCommand)
+        {
+            InstantCommand toggleHalfSpeedCommand = new InstantCommand(() -> {s_Swerve.toggleHalfSpeed();}, s_Swerve);
+            new JoystickButton(driver, XboxController.Button.kRightBumper.value).onTrue(toggleHalfSpeedCommand).onFalse(toggleHalfSpeedCommand);
+        }
         new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.FEED_SHOOTER)); // 1 - feed shooter
         new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85)); // 2 - start shooter
         // new JoystickButton(operator, 3).whileTrue(new InstantCommand(() -> s_Climber.setLeft(-0.3))); // 3 - left climber down

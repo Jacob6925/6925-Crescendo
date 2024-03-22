@@ -87,8 +87,8 @@ public class IntakeSubsys extends SubsystemBase {
         //     }, this);
         // }
 
-        SmartDashboard.putString("Intake State", indexerSpeed.toString());
-        SmartDashboard.putNumber("Pivot Position", getIntakePivotRotorPosition());
+        SmartDashboard.putString("Intake State", indexerSpeed.name());
+        SmartDashboard.putString("Pivot Position", pivotState.name());
         // SmartDashboard.putBoolean("Note in intake", intakeHasNote());
     }
 

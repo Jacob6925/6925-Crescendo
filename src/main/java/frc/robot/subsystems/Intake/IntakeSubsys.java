@@ -17,8 +17,8 @@ public class IntakeSubsys extends SubsystemBase {
     public final TalonFX pivotMotor = new TalonFX(15);
 
     // States
-    public static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
-    public static PivotState pivotState;
+    private IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
+    private PivotState pivotState;
 
     // Motion Magic
     private final PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
@@ -33,7 +33,12 @@ public class IntakeSubsys extends SubsystemBase {
               Indexer
     ==============================*/
     public void setIndexerSpeed(IndexerSpeed speed) {
-        indexerSpeed = speed;
+        setIndexerSpeed(speed, true);
+    }
+
+
+    private void setIndexerSpeed(IndexerSpeed speed, boolean updateSpeed) {
+        if (updateSpeed) indexerSpeed = speed;
         indexerMotor.set(indexerSpeed.speed);
     }
     
@@ -63,24 +68,24 @@ public class IntakeSubsys extends SubsystemBase {
     /*============================
               Periodic
     ==============================*/
+    private int pulseCount = 0;
+
+    // Called every ~20ms
     @Override
     public void periodic() {
+        // Possible issue: if the indexer is spinning out because of pulse then gets changed to FEED_SHOOTER, the note may not make it
+        // possible solution: add a lastSpeed var
+        if (indexerSpeed == IndexerSpeed.PULSE) {
+            // Use the count to turn indexer off for 10 periodic iterations (about 200ms / 0.2s)
+            // then intake for for 40 periodic iterations (800ms = 0.8s)
+            // mod 50 because 1 period of cycling is 50 iterations
+            if (pulseCount % 50 >= 0 && pulseCount % 50 <= 10) {
+                setIndexerSpeed(IndexerSpeed.NONE, false);
+            } else {
+                setIndexerSpeed(IndexerSpeed.INTAKE, false);
+            }
 
-        /*
-         * i realized why this doesn't work (we're stupid)
-         * it immediately sets the speed to NONE, then tests if it is PULSE next (which it's never pulse, because we just changed it)
-         * - Jacob
-         */
-
-        // if (indexerSpeed == IndexerSpeed.PULSE) {
-        //     // Use the timer to pulse the intake on for a 1/16 second,
-        //     // then off for a 15/16 second
-        //     if (Timer.getFPGATimestamp() % 1.0 < (1.0 / 45.0)) {
-        //         indexerSpeed = IndexerSpeed.PULSE;
-        //     } else {
-        //         indexerSpeed = IndexerSpeed.NONE;
-        //     }
-        // }
+        }
 
         // if (intakeHasNote() && pivotState == PivotState.GROUND && indexerMotor.get() > 0.05) {
         //     Commands.runOnce(() -> {

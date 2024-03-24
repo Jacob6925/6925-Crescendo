@@ -3,9 +3,7 @@ package frc.robot.subsystems.Intake;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-//import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -13,21 +11,21 @@ import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 
 public class IntakeSubsys extends SubsystemBase {
 
-    //Device ID
-    //private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
+    // Device ID
+    // private static final DigitalInput intakeLimitSwitch = new DigitalInput(9);
     public final TalonFX indexerMotor =  new TalonFX(14);
     public final TalonFX pivotMotor = new TalonFX(15);
 
-    //States
+    // States
     public static IndexerSpeed indexerSpeed = IndexerSpeed.NONE;
-    public static PivotState pivotState = PivotState.NONE;
+    public static PivotState pivotState;
 
     // Motion Magic
     private final PositionDutyCycle intakePivotPosition = new PositionDutyCycle(0);
 
     public IntakeSubsys() {
         pivotMotor.getConfigurator().apply(Robot.ctreConfigs.intakePivotFXConfig);
-        resetIntakePivot();
+        resetPivot();
     }
   
 
@@ -50,17 +48,14 @@ public class IntakeSubsys extends SubsystemBase {
         }
     }
 
-    public void resetIntakePivot() {
+    public void resetPivot() {
         pivotMotor.setPosition(0);
+        pivotState = PivotState.NONE;
     }
 
+    // TODO: remove?
     public double getIntakePivotRotorPosition() {
-        double motorRotations = pivotMotor.getRotorPosition().getValueAsDouble();
-        return motorRotations;
-    }
-
-    public double getPosition() {
-        return intakePivotPosition.Position;
+        return pivotMotor.getRotorPosition().getValueAsDouble();
     }
     
 
@@ -70,6 +65,13 @@ public class IntakeSubsys extends SubsystemBase {
     ==============================*/
     @Override
     public void periodic() {
+
+        /*
+         * i realized why this doesn't work (we're stupid)
+         * it immediately sets the speed to NONE, then tests if it is PULSE next (which it's never pulse, because we just changed it)
+         * - Jacob
+         */
+
         // if (indexerSpeed == IndexerSpeed.PULSE) {
         //     // Use the timer to pulse the intake on for a 1/16 second,
         //     // then off for a 15/16 second

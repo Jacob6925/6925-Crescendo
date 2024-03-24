@@ -84,7 +84,7 @@ public class IntakeSubsys extends SubsystemBase {
             } else {
                 setIndexerSpeed(IndexerSpeed.INTAKE, false);
             }
-
+            pulseCount++;
         }
 
         // if (intakeHasNote() && pivotState == PivotState.GROUND && indexerMotor.get() > 0.05) {

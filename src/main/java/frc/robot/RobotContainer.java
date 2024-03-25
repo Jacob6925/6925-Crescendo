@@ -16,12 +16,12 @@ import frc.robot.commands.teleop.ClimberCommand;
 import frc.robot.commands.teleop.IntakeCommand;
 import frc.robot.commands.teleop.ShooterCommand;
 import frc.robot.commands.teleop.TeleopSwerve;
-import frc.robot.subsystems.ShooterSubsys;
 import frc.robot.subsystems.SwerveSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
 import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
+import frc.robot.subsystems.Shooter.ShooterSubsys;
 import frc. robot.subsystems.ClimberSubsys;
 
 public class RobotContainer {

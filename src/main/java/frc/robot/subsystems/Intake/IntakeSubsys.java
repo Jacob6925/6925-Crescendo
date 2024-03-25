@@ -25,6 +25,7 @@ public class IntakeSubsys extends SubsystemBase {
 
     public IntakeSubsys() {
         pivotMotor.getConfigurator().apply(Robot.ctreConfigs.intakePivotFXConfig);
+        indexerMotor.getConfigurator().apply(Robot.ctreConfigs.intakeIndexerFXConfig);
         resetPivot();
     }
   
@@ -63,8 +64,6 @@ public class IntakeSubsys extends SubsystemBase {
         return pivotMotor.getRotorPosition().getValueAsDouble();
     }
     
-
-
     /*============================
               Periodic
     ==============================*/

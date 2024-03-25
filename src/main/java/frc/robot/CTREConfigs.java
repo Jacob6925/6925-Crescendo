@@ -5,7 +5,6 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
-import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
 import frc.robot.subsystems.Intake.IntakeConstants;
@@ -16,8 +15,8 @@ public final class CTREConfigs {
     public final TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration intakeIndexerFXConfig = new TalonFXConfiguration();
+    // public final TalonFXConfiguration climberConfig = new TalonFXConfiguration();
     public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
-    public final SoftwareLimitSwitchConfigs climberConfig = new SoftwareLimitSwitchConfigs();
     public final TalonFXConfiguration shooterFXConfig = new TalonFXConfiguration();
 
     public CTREConfigs() {
@@ -114,11 +113,11 @@ public final class CTREConfigs {
         ==============================*/
 
         /* Intake Neutral Mode */
-        var intakeOutput = intakeIndexerFXConfig.MotorOutput;
+        MotorOutputConfigs intakeOutput = intakeIndexerFXConfig.MotorOutput;
         intakeOutput.NeutralMode = IntakeConstants.INTAKE_NEUTRAL_MODE;
 
         /* Intake Current Limits */
-        var intakeCurrentLimits = intakeIndexerFXConfig.CurrentLimits;
+        CurrentLimitsConfigs intakeCurrentLimits = intakeIndexerFXConfig.CurrentLimits;
         intakeCurrentLimits.SupplyCurrentLimitEnable = IntakeConstants.INTAKE_ENABLE_CURRENT_LIMIT;
         intakeCurrentLimits.SupplyCurrentLimit = IntakeConstants.INTAKE_SUPPLY_CURRENT_LIMIT;
         intakeCurrentLimits.SupplyCurrentThreshold = IntakeConstants.INTAKE_SUPPLY_CURRENT_THRESHOLD;
@@ -127,15 +126,16 @@ public final class CTREConfigs {
         /*============================
                     Climber
         ==============================*/
-        // climberConfig.ForwardSoftLimitEnable = true;
-        // climberConfig.ForwardSoftLimitThreshold = 0;
+        // SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
+        // climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
+        // climberSoftwareLimitConfig.ForwardSoftLimitThreshold = 0;
 
         /*============================
                     Shooter
         ==============================*/
 
         /* Shooter Output and Neutral Mode */
-        var shooterOutput = shooterFXConfig.MotorOutput;
+        MotorOutputConfigs shooterOutput = shooterFXConfig.MotorOutput;
         shooterOutput.NeutralMode = ShooterConstants.SHOOTER_NEUTRAL_MODE;
 
         /* Shooter Current Limits */

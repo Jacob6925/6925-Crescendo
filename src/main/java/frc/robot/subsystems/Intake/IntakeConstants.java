@@ -15,6 +15,17 @@ public class IntakeConstants {
     public static final double INDEXER_PULSE_SPEED = 0.4;
     public static final double INDEXER_AMP_SPEED = -0.215;
 
+    /* Intake Neutral Mode */
+    public static final NeutralModeValue INTAKE_NEUTRAL_MODE = NeutralModeValue.Coast;
+ 
+    /* Intake Current Limits */
+    public static final boolean INTAKE_ENABLE_CURRENT_LIMIT = true;
+    public static final int INTAKE_SUPPLY_CURRENT_LIMIT = 20;
+    public static final int INTAKE_SUPPLY_CURRENT_THRESHOLD = 30;
+    public static final double INTAKE_SUPPLY_TIME_THRESHOLD = 0.1;
+ 
+    public static final double INTAKING_NOTE_CURRENT = 43;
+
     public enum IndexerSpeed {
         NONE(0.0),
         INTAKE(INDEXER_INTAKE_SPEED),

@@ -67,7 +67,7 @@ public final class CTREConfigs {
         swerveDriveFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
         swerveDriveFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
 
-        //Pivot Configs
+        // Pivot Configs
         
         /* Intake Pivot Output and Neutral Mode */
         MotorOutputConfigs intakePivotOutput = intakePivotFXConfig.MotorOutput;

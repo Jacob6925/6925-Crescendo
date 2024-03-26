@@ -7,6 +7,7 @@ import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Shooter.ShooterConstants;
@@ -127,6 +128,8 @@ public final class CTREConfigs {
         /*============================
                     Climber
         ==============================*/
+        climberConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
         SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
         climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
         climberSoftwareLimitConfig.ForwardSoftLimitThreshold = -10;

@@ -3,3 +3,7 @@
 - set IntakeConstants.INTAKE_PIVOT_SOURCE vars to respective values
 
 - maybe: implement SquaredInput
+
+- check for usage of following:
+  - IntakeConstants.INTAKING_NOTE_CURRENT
+  - IntakeSubsys#getIntakePivotRotorPosition()

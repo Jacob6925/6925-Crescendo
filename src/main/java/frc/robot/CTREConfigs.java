@@ -5,6 +5,7 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
 import frc.robot.subsystems.Intake.IntakeConstants;
@@ -15,7 +16,7 @@ public final class CTREConfigs {
     public final TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration intakeIndexerFXConfig = new TalonFXConfiguration();
-    // public final TalonFXConfiguration climberConfig = new TalonFXConfiguration();
+    public final TalonFXConfiguration climberConfig = new TalonFXConfiguration();
     public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
     public final TalonFXConfiguration shooterFXConfig = new TalonFXConfiguration();
 
@@ -126,9 +127,9 @@ public final class CTREConfigs {
         /*============================
                     Climber
         ==============================*/
-        // SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
-        // climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
-        // climberSoftwareLimitConfig.ForwardSoftLimitThreshold = 0;
+        SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
+        climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
+        climberSoftwareLimitConfig.ForwardSoftLimitThreshold = -10;
 
         /*============================
                     Shooter

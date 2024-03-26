@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4682680793933023,
-      "y": 5.52661562465982
+      "x": 0.7878249089831516,
+      "y": 4.318431970197273
     },
-    "rotation": 0
+    "rotation": -62.447188423282185
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.6
           }
         },
         {
@@ -53,15 +53,28 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "Ground Intake"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Ground Intake"
+                      }
+                    }
+                  ]
                 }
               },
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M-P2-A"
+                  "pathName": "Charl-A"
                 }
               }
             ]
@@ -80,70 +93,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M-P2-B"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Score Gamepiece"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stop Indexer"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Ground Intake"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M-P1-A"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stow Intake"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "M-P1-B"
+                  "pathName": "Charl-B"
                 }
               }
             ]
@@ -177,7 +127,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Taxi"
+            "pathName": "Charl-C"
           }
         },
         {

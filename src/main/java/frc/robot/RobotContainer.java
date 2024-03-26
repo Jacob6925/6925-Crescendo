@@ -12,19 +12,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TeleopSwerve;
-import frc.robot.commands.climber.ClimberLeftCommand;
-import frc.robot.commands.climber.ClimberRightCommand;
-import frc.robot.subsystems.ShooterSubsys;
+import frc.robot.commands.teleop.ClimberCommand;
+import frc.robot.commands.teleop.IntakeCommand;
+import frc.robot.commands.teleop.ShooterCommand;
+import frc.robot.commands.teleop.TeleopSwerve;
 import frc.robot.subsystems.SwerveSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants;
 import frc.robot.subsystems.Intake.IntakeSubsys;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
 import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
-import frc.robot.subsystems.climber.ClimberLeft;
-import frc.robot.subsystems.climber.ClimberRight;
+import frc.robot.subsystems.Shooter.ShooterSubsys;
+import frc. robot.subsystems.ClimberSubsys;
 
 public class RobotContainer {
     /* Controllers */
@@ -37,15 +35,13 @@ public class RobotContainer {
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
     public final SwerveSubsys s_Swerve = new SwerveSubsys();
     public final ShooterSubsys s_Shooter = new ShooterSubsys();
     public final IntakeSubsys s_Intake = new IntakeSubsys();
-    public final ClimberLeft s_ClimberLeft = new ClimberLeft();
-    public final ClimberRight s_ClimberRight = new ClimberRight();
+    public final ClimberSubsys s_Climber = new ClimberSubsys();
 
      /* AutoChooser */
     private final SendableChooser<Command> autoChooser;
@@ -88,7 +84,7 @@ public class RobotContainer {
 
         
 
-        //Auto chooser
+        // Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
         SmartDashboard.putData("Auto Mode", autoChooser);
 
@@ -107,16 +103,21 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-
+        // Zerp Gyro
+        new JoystickButton(driver, XboxController.Button.kY.value).onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        // Toggle Half Speed (start a new scope for toggleHalfSpeedCommand)
+        {
+            InstantCommand toggleHalfSpeedCommand = new InstantCommand(() -> {s_Swerve.toggleHalfSpeed();}, s_Swerve);
+            new JoystickButton(driver, XboxController.Button.kRightBumper.value).onTrue(toggleHalfSpeedCommand).onFalse(toggleHalfSpeedCommand);
+        }
         new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.FEED_SHOOTER)); // 1 - feed shooter
         new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85)); // 2 - start shooter
-        new JoystickButton(operator, 3).whileTrue(new ClimberLeftCommand(s_ClimberLeft, -0.3)); // 3 - left climber down
-        new JoystickButton(operator, 4).whileTrue(new ClimberRightCommand(s_ClimberRight, -0.3)); // 4 - right climber down
-        new JoystickButton(operator, 5).whileTrue(new ClimberLeftCommand(s_ClimberLeft, 0.3)); // 5 - left climber up
-        new JoystickButton(operator, 6).whileTrue(new ClimberRightCommand(s_ClimberRight, 0.3)); // 6 - right climber up
-        // new JoystickButton(operator, 3).whileTrue(Commands.parallel(new ClimberLeftCommand(s_ClimberLeft, -0.3), new ClimberRightCommand(s_ClimberRight, -0.3))); // climber down
-        // new JoystickButton(operator, 5).whileTrue(Commands.parallel(new ClimberLeftCommand(s_ClimberLeft, 0.3), new ClimberRightCommand(s_ClimberRight, 0.3))); // climber down
+        // new JoystickButton(operator, 3).whileTrue(new InstantCommand(() -> s_Climber.setLeft(-0.3))); // 3 - left climber down
+        // new JoystickButton(operator, 4).whileTrue(new InstantCommand(() -> s_Climber.setRight(-0.3))); // 4 - right climber down
+        // new JoystickButton(operator, 5).whileTrue(new InstantCommand(() -> s_Climber.setLeft(0.3))); // 5 - left climber up
+        // new JoystickButton(operator, 6).whileTrue(new InstantCommand(() -> s_Climber.setRight(0.3))); // 6 - right climber up
+        new JoystickButton(operator, 3).whileTrue(new ClimberCommand(s_Climber, -0.3, -0.3)); // climber down
+        new JoystickButton(operator, 5).whileTrue(new ClimberCommand(s_Climber, 0.3, 0.3)); // climber up
         new JoystickButton(operator, 7).onTrue(new IntakeCommand(s_Intake, PivotState.AMP, IndexerSpeed.NONE)); // 7 - amp pivot
         new JoystickButton(operator, 8).whileTrue(new IntakeCommand(s_Intake, PivotState.NONE, IndexerSpeed.AMP)); // 8 - amp indexer
         new JoystickButton(operator, 9).whileTrue(new IntakeCommand(s_Intake, null, IndexerSpeed.INTAKE)); // 9 - intake (centering)

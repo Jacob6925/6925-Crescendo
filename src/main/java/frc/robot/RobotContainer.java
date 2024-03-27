@@ -25,7 +25,6 @@ import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
 import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 import frc.robot.subsystems.climber.ClimberLeft;
 import frc.robot.subsystems.climber.ClimberRight;
-import frc.robot.subsystems.ShooterSubsys;
 
 public class RobotContainer {
     /* Controllers */

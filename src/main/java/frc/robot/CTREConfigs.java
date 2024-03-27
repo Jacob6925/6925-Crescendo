@@ -129,7 +129,7 @@ public final class CTREConfigs {
         ==============================*/
         SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
         climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
-        climberSoftwareLimitConfig.ForwardSoftLimitThreshold = -10;
+        climberSoftwareLimitConfig.ForwardSoftLimitThreshold = -64; // 64:1 gear ratio
 
         /*============================
                     Shooter

@@ -25,6 +25,7 @@ import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
 import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
 import frc.robot.subsystems.climber.ClimberLeft;
 import frc.robot.subsystems.climber.ClimberRight;
+import frc.robot.subsystems.ShooterSubsys;
 
 public class RobotContainer {
     /* Controllers */
@@ -37,7 +38,7 @@ public class RobotContainer {
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
@@ -88,7 +89,7 @@ public class RobotContainer {
 
         
 
-        //Auto chooser
+        // Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
         SmartDashboard.putData("Auto Mode", autoChooser);
 
@@ -108,7 +109,7 @@ public class RobotContainer {
             )
         );
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-
+        
         new JoystickButton(operator, 1).whileTrue(new IntakeCommand(s_Intake, null, IntakeConstants.IndexerSpeed.FEED_SHOOTER)); // 1 - feed shooter
         new JoystickButton(operator, 2).whileTrue(new ShooterCommand(s_Shooter, -0.85, -0.85)); // 2 - start shooter
         new JoystickButton(operator, 3).whileTrue(new ClimberLeftCommand(s_ClimberLeft, -0.3)); // 3 - left climber down

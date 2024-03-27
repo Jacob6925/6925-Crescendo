@@ -79,7 +79,7 @@ public class IntakeSubsys extends SubsystemBase {
             // then intake for for 40 periodic iterations (800ms = 0.8s)
             // mod 50 because 1 period of cycling is 50 iterations
             if (pulseCount % 50 >= 0 && pulseCount % 50 <= 10) {
-                setIndexerSpeed(IndexerSpeed.NONE, false);
+                setIndexerSpeed(IndexerSpeed.EJECT, false);
             } else {
                 setIndexerSpeed(IndexerSpeed.INTAKE, false);
             }

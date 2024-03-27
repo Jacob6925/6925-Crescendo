@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
 import frc.robot.subsystems.Intake.IntakeConstants.PivotState;
+import frc.robot.subsystems.climber.ClimberSubsysBase;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -81,10 +82,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    
-    RobotContainer instance = RobotContainer.getInstance();
-    instance.s_Intake.setPivotState(PivotState.STOW);
-    instance.s_Intake.setIndexerSpeed(IndexerSpeed.NONE);
   }
 
   /** This function is called periodically during operator control. */
@@ -104,10 +101,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousExit() {
     RobotContainer instance = RobotContainer.getInstance();
+    instance.getAutonomousCommand().cancel();
+
     instance.s_Shooter.shooterOff();
-    // RobotContainer instance = RobotContainer.getInstance();
-    // instance.s_Climber
-    // instance.s_Intake
-    // instance.s_Shooter
+    // ClimberSubsysBase.climberOff();
+    // instance.s_Intake.setPivotState(PivotState.NONE);
+    // instance.s_Intake.setIndexerSpeed(IndexerSpeed.NONE);
   } 
 }

@@ -10,23 +10,16 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.subsystems.Intake.IntakeConstants;
-import frc.robot.subsystems.Shooter.ShooterConstants;
 
 public final class CTREConfigs {
     public final TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
-    public final TalonFXConfiguration intakeIndexerFXConfig = new TalonFXConfiguration();
-    public final TalonFXConfiguration climberConfig = new TalonFXConfiguration();
     public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
-    public final TalonFXConfiguration shooterFXConfig = new TalonFXConfiguration();
+    public final SoftwareLimitSwitchConfigs climberConfig = new SoftwareLimitSwitchConfigs();
+    public final TalonFXConfiguration climbeFxConfiguration = new TalonFXConfiguration();
 
     public CTREConfigs() {
-
-        /*============================
-                    Swerve
-        ==============================*/
-
         /** Swerve CANCoder Configuration */
         swerveCANcoderConfig.MagnetSensor.SensorDirection = Constants.Swerve.cancoderInvert;
 
@@ -76,9 +69,7 @@ public final class CTREConfigs {
         swerveDriveFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
         swerveDriveFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
 
-        /*============================
-                Intake Pivot
-        ==============================*/
+        //Pivot Configs
         
         /* Intake Pivot Output and Neutral Mode */
         MotorOutputConfigs intakePivotOutput = intakePivotFXConfig.MotorOutput;
@@ -110,44 +101,9 @@ public final class CTREConfigs {
         intakePivotMotionMagic.MotionMagicCruiseVelocity = IntakeConstants.INTAKE_PIVOT_CRUISE_VELOCITY;
         intakePivotMotionMagic.MotionMagicAcceleration = IntakeConstants.INTAKE_PIVOT_ACCELERATION;
 
-        /*============================
-                Intake Indexer
-        ==============================*/
-
-        /* Intake Neutral Mode */
-        MotorOutputConfigs intakeOutput = intakeIndexerFXConfig.MotorOutput;
-        intakeOutput.NeutralMode = IntakeConstants.INTAKE_NEUTRAL_MODE;
-
-        /* Intake Current Limits */
-        CurrentLimitsConfigs intakeCurrentLimits = intakeIndexerFXConfig.CurrentLimits;
-        intakeCurrentLimits.SupplyCurrentLimitEnable = IntakeConstants.INTAKE_ENABLE_CURRENT_LIMIT;
-        intakeCurrentLimits.SupplyCurrentLimit = IntakeConstants.INTAKE_SUPPLY_CURRENT_LIMIT;
-        intakeCurrentLimits.SupplyCurrentThreshold = IntakeConstants.INTAKE_SUPPLY_CURRENT_THRESHOLD;
-        intakeCurrentLimits.SupplyTimeThreshold = IntakeConstants.INTAKE_SUPPLY_TIME_THRESHOLD;
-
-        /*============================
-                    Climber
-        ==============================*/
-        climberConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-
-        SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
-        climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
-        climberSoftwareLimitConfig.ForwardSoftLimitThreshold = -10;
-
-        /*============================
-                    Shooter
-        ==============================*/
-
-        /* Shooter Output and Neutral Mode */
-        MotorOutputConfigs shooterOutput = shooterFXConfig.MotorOutput;
-        shooterOutput.NeutralMode = ShooterConstants.SHOOTER_NEUTRAL_MODE;
-
-        /* Shooter Current Limits */
-        CurrentLimitsConfigs shooterCurrentLimits = shooterFXConfig.CurrentLimits;
-        shooterCurrentLimits.SupplyCurrentLimitEnable = ShooterConstants.SHOOTER_ENABLE_CURRENT_LIMIT;
-        shooterCurrentLimits.SupplyCurrentLimit = ShooterConstants.SHOOTER_SUPPLY_CURRENT_LIMIT;
-        shooterCurrentLimits.SupplyCurrentThreshold = ShooterConstants.SHOOTER_SUPPLY_CURRENT_THRESHOLD;
-        shooterCurrentLimits.SupplyTimeThreshold = ShooterConstants.SHOOTER_SUPPLY_TIME_THRESHOLD;
-
+        /* Climber Config */
+        climberConfig.ForwardSoftLimitEnable = true;
+        climberConfig.ForwardSoftLimitThreshold = 0;
+        climbeFxConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     }
 }

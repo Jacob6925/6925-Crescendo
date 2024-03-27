@@ -13,7 +13,18 @@ public class IntakeConstants {
     public static final double INDEXER_EJECT_SPEED = -0.1;
     public static final double INDEXER_FEED_SHOOTER_SPEED = -0.7;
     public static final double INDEXER_PULSE_SPEED = 0.4;
-    public static final double INDEXER_AMP_SPEED = -0.207;
+    public static final double INDEXER_AMP_SPEED = -0.215;
+
+    /* Intake Neutral Mode */
+    public static final NeutralModeValue INTAKE_NEUTRAL_MODE = NeutralModeValue.Coast;
+ 
+    /* Intake Current Limits */
+    public static final boolean INTAKE_ENABLE_CURRENT_LIMIT = true; // enable current limit
+    public static final int INTAKE_SUPPLY_CURRENT_THRESHOLD = 30; // once the motor reaches this ampage, the SUPPLY_TIME_THRESHOLD will start (0-511)
+    public static final double INTAKE_SUPPLY_TIME_THRESHOLD = 0.1; // time period that unlimited ampage can be drawn before limit applys (0-1.275)
+    public static final int INTAKE_SUPPLY_CURRENT_LIMIT = 20; // max current in Amps (0-800)
+ 
+    public static final double INTAKING_NOTE_CURRENT = 43;
 
     public enum IndexerSpeed {
         NONE(0.0),
@@ -52,7 +63,7 @@ public class IntakeConstants {
     /* Intake Pivot Setpoints */
     public static final double INTAKE_PIVOT_GROUND = -41;
     public static final double INTAKE_PIVOT_SOURCE = 0;
-    public static final double INTAKE_PIVOT_AMP = -17.6;
+    public static final double INTAKE_PIVOT_AMP = -18;
     public static final double INTAKE_PIVOT_STOW = -1;
     
     /* Intake Pivot Motion Magic */

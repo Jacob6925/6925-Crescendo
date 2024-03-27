@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Spin Up Shooter"
@@ -240,7 +246,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Taxi"
+            "pathName": "M-P4-A"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
           }
         }
       ]

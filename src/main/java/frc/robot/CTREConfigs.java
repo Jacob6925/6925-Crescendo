@@ -130,9 +130,9 @@ public final class CTREConfigs {
         ==============================*/
         climberConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
-        SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
-        climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
-        climberSoftwareLimitConfig.ForwardSoftLimitThreshold = -64; // 64:1 gear ratio
+        // SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
+        // climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
+        // climberSoftwareLimitConfig.ForwardSoftLimitThreshold = 0; // 64:1 gear ratio
 
         /*============================
                     Shooter

@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Intake.IntakeConstants.IndexerSpeed;
@@ -22,6 +23,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private int secondsPass = 0;
+  private int periodTime = 0;
+  private boolean periodicInitiated = false;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -48,6 +53,13 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    // Update the SmartDashboard timer
+    int secondsLeft = periodTime-secondsPass;
+    if (secondsLeft < 0) secondsLeft = 0;
+    String formattedSeconds = "" + (secondsLeft % 60);
+    if (formattedSeconds.length() == 1) formattedSeconds = "0"+formattedSeconds;
+    SmartDashboard.putString("Time Left", (int)(Math.floor(secondsLeft/60)) + ":" + formattedSeconds);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -61,11 +73,15 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    SmartDashboard.putString("Raw Auto Selected Name", m_autonomousCommand.getName());
+    SmartDashboard.putString("Raw Auto Selected", "" + (m_autonomousCommand != null ? m_autonomousCommand : "null"));
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    setTimerPeriodic(15);
   }
 
   /** This function is called periodically during autonomous. */
@@ -85,6 +101,8 @@ public class Robot extends TimedRobot {
     RobotContainer instance = RobotContainer.getInstance();
     instance.s_Intake.setPivotState(PivotState.STOW);
     instance.s_Intake.setIndexerSpeed(IndexerSpeed.NONE);
+
+    setTimerPeriodic(60*2+15);
   }
 
   /** This function is called periodically during operator control. */
@@ -105,9 +123,17 @@ public class Robot extends TimedRobot {
   public void autonomousExit() {
     RobotContainer instance = RobotContainer.getInstance();
     instance.s_Shooter.shooterOff();
-    // RobotContainer instance = RobotContainer.getInstance();
-    // instance.s_Climber
-    // instance.s_Intake
-    // instance.s_Shooter
-  } 
+  }
+
+
+
+  private void setTimerPeriodic(int seconds) {
+    periodTime = seconds;
+    if (!periodicInitiated) {
+      addPeriodic(() -> {
+        if (isEnabled()) secondsPass++;
+      }, 1);
+      periodicInitiated = true;
+    }
+  }
 }

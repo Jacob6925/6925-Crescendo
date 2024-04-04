@@ -5,7 +5,6 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
-import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -98,13 +97,6 @@ public final class CTREConfigs {
         intakePivotSlot0.kI = IntakeConstants.INTAKE_PIVOT_I;
         intakePivotSlot0.kD = IntakeConstants.INTAKE_PIVOT_D;
         intakePivotSlot0.kV = IntakeConstants.INTAKE_PIVOT_V;
-        
-        /* Intake Pivot Feedback Config */
-        // FeedbackConfigs intakePivotFeedback = intakePivotFXConfig.Feedback;
-        // intakePivotFeedback.FeedbackRemoteSensorID = Constants.INTAKE_CANCODER_ID;
-        // intakePivotFeedback.FeedbackSensorSource = FeedbackSensorSourceValue.SyncCANcoder;
-        // intakePivotFeedback.SensorToMechanismRatio = 1;
-        // intakePivotFeedback.RotorToSensorRatio = 25; 
         
         MotionMagicConfigs intakePivotMotionMagic = intakePivotFXConfig.MotionMagic;
         intakePivotMotionMagic.MotionMagicCruiseVelocity = IntakeConstants.INTAKE_PIVOT_CRUISE_VELOCITY;

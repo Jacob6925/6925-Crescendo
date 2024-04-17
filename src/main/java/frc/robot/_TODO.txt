@@ -1,12 +1,10 @@
-- limit switch
-  - when limit switch is detected: IntakeSpeed.NONE, PivotState.STOW
 - set IntakeConstants.INTAKE_PIVOT_SOURCE vars to respective values
-
-- maybe: implement SquaredInput
 
 - check for usage of following:
   - IntakeConstants.INTAKING_NOTE_CURRENT
   - IntakeSubsys#getIntakePivotRotorPosition()
 - delete ShooterConstants.SHOOTER_NEUTRAL_MODE (default)
+- test auto with nothing selected, then teleop
+  - Robot.java line 76-77
 
 - question: how do you know which subclass + drive ratio to use from COTSTalonFXSwerveConstants

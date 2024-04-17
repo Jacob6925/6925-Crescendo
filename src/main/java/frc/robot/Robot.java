@@ -73,8 +73,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    SmartDashboard.putString("Raw Auto Selected Name", m_autonomousCommand.getName());
-    SmartDashboard.putString("Raw Auto Selected", "" + (m_autonomousCommand != null ? m_autonomousCommand : "null"));
+    // SmartDashboard.putString("Raw Auto Selected Name", m_autonomousCommand.getName());
+    // SmartDashboard.putString("Raw Auto Selected", "" + (m_autonomousCommand != null ? m_autonomousCommand : "null"));
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

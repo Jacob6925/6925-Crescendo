@@ -79,20 +79,20 @@ public class SwerveSubsys extends SubsystemBase {
         halfSpeed = !halfSpeed;
     }
 
-    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+    public void drive(Translation2d translation, double rotation/*, boolean fieldRelative */, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
+                /*fieldRelative ? */ChassisSpeeds.fromFieldRelativeSpeeds(
                     translation.getX(), 
                     translation.getY(), 
                     rotation, 
                     getHeading()
                 )
-                : new ChassisSpeeds(
+                /*: new ChassisSpeeds(
                     translation.getX(), 
                     translation.getY(), 
                     rotation
-                )
+                )*/
             );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed*(halfSpeed ? 0.5 : 1));
 

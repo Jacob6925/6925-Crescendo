@@ -17,8 +17,8 @@ public final class CTREConfigs {
     public final TalonFXConfiguration intakePivotFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration intakeIndexerFXConfig = new TalonFXConfiguration();
     public final TalonFXConfiguration climberConfig = new TalonFXConfiguration();
-    public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
     public final TalonFXConfiguration shooterFXConfig = new TalonFXConfiguration();
+    public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
 
     public CTREConfigs() {
 
@@ -125,10 +125,10 @@ public final class CTREConfigs {
                     Climber
         ==============================*/
         climberConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-
-        // SoftwareLimitSwitchConfigs climberSoftwareLimitConfig = climberConfig.SoftwareLimitSwitch;
-        // climberSoftwareLimitConfig.ForwardSoftLimitEnable = true;
-        // climberSoftwareLimitConfig.ForwardSoftLimitThreshold = 0; // 64:1 gear ratio
+        climberConfig.SoftwareLimitSwitch.ReverseSoftLimitEnable = true;
+        climberConfig.SoftwareLimitSwitch.ReverseSoftLimitThreshold = 0;
+        climberConfig.SoftwareLimitSwitch.ForwardSoftLimitEnable = true;
+        climberConfig.SoftwareLimitSwitch.ForwardSoftLimitThreshold = 140;
 
         /*============================
                     Shooter

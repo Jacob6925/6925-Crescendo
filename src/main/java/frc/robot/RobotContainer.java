@@ -70,16 +70,17 @@ public class RobotContainer {
         registerNamedCommands();
 
         // Auto chooser
-        autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+        // autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()`
+        autoChooser = AutoBuilder.buildAutoChooser("M-0213(4)"); // Default auto will be M-0213(4)
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         // Setup camera
         CameraServer.startAutomaticCapture();
 
         // Setup photonvision
-        PortForwarder.add(5800, "photonvision.local", 5800);
-        photonVision = new PhotonVisionHandler(this, "Arducam_OV9281_USB_Camera");
-        // photonVision = null;
+        // PortForwarder.add(5800, "photonvision.local", 5800);
+        // photonVision = new PhotonVisionHandler(this, "Arducam_OV9281_USB_Camera");
+        photonVision = null;
     }
 
     private void configureButtonBindings() {

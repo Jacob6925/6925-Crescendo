@@ -1,4 +1,4 @@
-package frc.lib.util;
+package frc.lib.util.datacollection;
 
 import com.ctre.phoenix6.SignalLogger;
 import edu.wpi.first.units.Units;
